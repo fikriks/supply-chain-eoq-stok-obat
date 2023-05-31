@@ -31,6 +31,14 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('/', '\CodeIgniter\Shield\Controllers\LoginController::loginView', ['as' => 'login']);
+$routes->post('/', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');
+
+$routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($routes) {
+    // Dashboard
+    $routes->get('dashboard', 'Dashboard::index');
+});
+
 service('auth')->routes($routes);
 
 /*
