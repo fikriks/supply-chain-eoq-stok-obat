@@ -74,30 +74,9 @@
                         <li class="sidebar-title">Pengguna</li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Admin</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Supplier</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Staff Gudang</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Manajer</span>
+                            <a href="<?= site_url('admin/pengguna') ?>" class='sidebar-link'>
+                                <i class="bi bi-people-fill"></i>
+                                <span>Data Pengguna</span>
                             </a>
                         </li>
 
