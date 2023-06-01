@@ -28,7 +28,25 @@ class CreateObatTable extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true
             ],
+            'supplier_id' => [
+                'type'       => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true
+            ],
+            'satuan_id' => [
+                'type'       => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true
+            ],
             'stok' => [
+                'type'       => 'INT',
+                'constraint'     => 11
+            ],
+            'harga_beli' => [
+                'type'       => 'INT',
+                'constraint'     => 11
+            ],
+            'harga_jual' => [
                 'type'       => 'INT',
                 'constraint'     => 11
             ],
@@ -49,6 +67,8 @@ class CreateObatTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addKey('kode', false, true);
         $this->forge->addForeignKey('kategori_obat_id', 'kategori_obat', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('supplier_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('satuan_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('obat');
     }
 
