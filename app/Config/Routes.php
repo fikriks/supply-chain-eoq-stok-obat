@@ -40,6 +40,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($rou
 
     $routes->resource("kategori-obat", ['controller' => 'KategoriObat']);
     $routes->resource("obat", ['controller' => 'Obat']);
+    $routes->resource("satuan", ['controller' => 'Satuan']);
 });
 
 service('auth')->routes($routes);
