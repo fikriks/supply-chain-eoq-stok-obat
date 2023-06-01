@@ -37,6 +37,10 @@ $routes->post('/', '\CodeIgniter\Shield\Controllers\LoginController::loginAction
 $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($routes) {
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
+
+    // $routes->get('kategori-obat', 'KategoriObat::index');
+
+    $routes->resource("kategori-obat", ['controller' => 'KategoriObat']);
 });
 
 service('auth')->routes($routes);
