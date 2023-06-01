@@ -5,15 +5,19 @@ namespace App\Controllers\Admin;
 use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\KategoriObat;
+use App\Models\Satuan;
+use App\Models\UserModel;
 
 class Obat extends ResourceController
 {
-    private $KategoriObat;
+    private $KategoriObat, $Satuan, $User;
     protected $modelName = 'App\Models\Obat';
 
     public function __construct()
     {
         $this->KategoriObat = new KategoriObat();
+        $this->Satuan = new Satuan();
+        $this->User = new UserModel();
     }
 
     /**
@@ -23,7 +27,11 @@ class Obat extends ResourceController
      */
     public function index()
     {
-        $data['obat'] = $this->model->withKategoriObat()->findAll();
+        if ($this->request->getGet()) {
+            $data['obat'] = $this->model->withRelations()->where('obat.nama', $this->request->getGet('obat'))->findAll();
+        } else {
+            $data['obat'] = $this->model->withRelations()->findAll();
+        }
 
         return view('admin/obat/index', $data);
     }
@@ -45,7 +53,11 @@ class Obat extends ResourceController
      */
     public function new()
     {
-        $data['kategoriObat'] = $this->KategoriObat->findAll();
+        $data = [
+            'kategoriObat' => $this->KategoriObat->findAll(),
+            'satuanObat' => $this->Satuan->findAll(),
+            'supplier' => $this->User->getIdentity()
+        ];
 
         return view('admin/obat/new', $data);
     }
@@ -61,7 +73,11 @@ class Obat extends ResourceController
             'kode' => 'required',
             'nama' => 'required',
             'kategori_obat_id' => 'required',
+            'supplier_id' => 'required',
+            'satuan_id' => 'required',
             'stok' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
             'expired' => 'required'
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
@@ -89,6 +105,8 @@ class Obat extends ResourceController
     {
         $data = [
             'kategoriObat' => $this->KategoriObat->findAll(),
+            'satuanObat' => $this->Satuan->findAll(),
+            'supplier' => $this->User->getIdentity(),
             'obat' => $this->model->find($id)
         ];
 
@@ -106,7 +124,11 @@ class Obat extends ResourceController
             'kode' => 'required',
             'nama' => 'required',
             'kategori_obat_id' => 'required',
+            'supplier_id' => 'required',
+            'satuan_id' => 'required',
             'stok' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
             'expired' => 'required'
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());

@@ -13,7 +13,7 @@ class Obat extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['kode', 'nama', 'kategori_obat_id', 'stok', 'expired'];
+    protected $allowedFields    = ['kode', 'nama', 'kategori_obat_id', 'supplier_id', 'satuan_id', 'stok', 'harga_beli', 'harga_jual', 'expired'];
 
     // Dates
     protected $useTimestamps = true;
@@ -39,10 +39,14 @@ class Obat extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function withKategoriObat()
+    public function withRelations()
     {
-        $this->select("{$this->table}.*, kategori_obat.nama AS nama_kategori_obat");
+        $this->select("{$this->table}.*, kategori_obat.nama AS nama_kategori_obat, satuan.nama AS nama_satuan, auth_identities.name AS nama_supplier");
 
-        return $this->join('kategori_obat', 'kategori_obat.id = obat.kategori_obat_id');
+        $this->join('kategori_obat', 'kategori_obat.id = obat.kategori_obat_id')
+            ->join('satuan', 'satuan.id = obat.satuan_id')
+            ->join('auth_identities', 'auth_identities.user_id = obat.supplier_id');
+
+        return $this;
     }
 }

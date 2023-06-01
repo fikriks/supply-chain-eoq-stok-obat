@@ -16,10 +16,29 @@ Obat
 <!-- Basic Tables start -->
 <section class="section">
     <div class="card">
-        <div class="card-header">
-
-        </div>
         <div class="card-body">
+            <form action="<?= site_url('admin/obat') ?>" method="GET" class="form form-horizontal">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Pilih Obat</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="obat" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($obat as $o) : ?>
+                                    <option value="<?= $o->nama ?>" <?= request()->getGet('obat') == $o->nama ? 'selected' : '' ?>><?= $o->nama ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-sm-8 d-flex justify-content-start mt-3">
+                            <button type="submit" class="btn btn-primary me-1 mb-1">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="card">
@@ -50,17 +69,21 @@ Obat
                             <td><?= $o->kode ?></td>
                             <td><?= $o->nama ?></td>
                             <td><?= $o->nama_kategori_obat ?></td>
+                            <td><?= $o->nama_satuan ?></td>
+                            <td><?= $o->nama_supplier ?></td>
                             <td><?= $o->stok ?></td>
                             <td><?= $o->expired ?></td>
+                            <td><?= $o->harga_beli ?></td>
+                            <td><?= $o->harga_jual ?></td>
                             <td><?= $o->created_at ?></td>
                             <td><?= $o->updated_at ?></td>
                             <td>
                                 <div class="row">
-                                    <a href="<?= site_url('admin/obat/' . $o->id . '/edit') ?>" class="btn btn-warning col-3">Edit</a>
-                                    <form class="col-6" action="<?= site_url('admin/obat/' . $o->id) ?>" method="POST">
+                                    <a href="<?= site_url('admin/obat/' . $o->id . '/edit') ?>" class="btn btn-warning col"><i class="bi bi-pencil-fill"></i></a>
+                                    <form class="col" action="<?= site_url('admin/obat/' . $o->id) ?>" method="POST">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="submit" class="btn btn-danger" onClick="return confirm('Apakah anda yakin ingin menghapus data ini?');"> Hapus</button>
+                                        <button type="submit" class="btn btn-danger col" onClick="return confirm('Apakah anda yakin ingin menghapus data ini?');"><i class="bi bi-trash-fill"></i></button>
                                     </form>
                                 </div>
                             </td>

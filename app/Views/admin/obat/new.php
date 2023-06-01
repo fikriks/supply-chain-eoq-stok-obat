@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('title') ?>
-Tambah Kategori Obat
+Tambah Obat
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -39,10 +39,46 @@ Tambah Kategori Obat
                             </select>
                         </div>
                         <div class="col-md-4">
+                            <label>Supplier</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="supplier_id" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($supplier as $s) : ?>
+                                    <?php if ($s->group == 'supplier') : ?>
+                                        <option value="<?= $s->id ?>" <?= old('supplier_id') == $s->id ? 'selected' : '' ?>><?= $s->name ?></option>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Satuan</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="satuan_id" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($satuanObat as $s) : ?>
+                                    <option value="<?= $s->id ?>" <?= old('satuan_id') == $s->id ? 'selected' : '' ?>><?= $s->nama ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
                             <label>Stok</label>
                         </div>
                         <div class="col-md-8 form-group">
                             <input type="number" class="form-control" name="stok" placeholder="Stok" value="<?= old('stok') ?>" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Harga Beli</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="number" class="form-control" name="harga_beli" placeholder="Harga Beli" value="<?= old('harga_beli') ?>" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Harga Jual</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="number" class="form-control" name="harga_jual" placeholder="Harga Jual" value="<?= old('harga_jual') ?>" required>
                         </div>
                         <div class="col-md-4">
                             <label>Expired</label>

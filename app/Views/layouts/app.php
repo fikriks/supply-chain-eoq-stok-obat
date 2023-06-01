@@ -105,21 +105,21 @@
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-capsule"></i>
                                 <span>Data Obat</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/kategori-obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-bookmark-fill"></i>
                                 <span>Kategori Obat</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/satuan') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-archive-fill"></i>
                                 <span>Satuan Obat</span>
                             </a>
                         </li>
