@@ -19,6 +19,11 @@ class UserSeeder extends Seeder
         $userIdentityModel = new UserIdentityModel;
         $now = Time::now('Asia/Jakarta', 'id_ID');
 
+        $admin = [
+            'username' => 'admin123',
+            'active' => 1
+        ];
+
         $manajer = [
             'username' => 'manajer123',
             'active' => 1
@@ -39,6 +44,9 @@ class UserSeeder extends Seeder
             'active' => 1
         ];
 
+        $userModel->insert($admin);
+        $adminId = $userModel->getInsertID();
+
         $userModel->insert($manajer);
         $manajerId = $userModel->getInsertID();
 
@@ -52,6 +60,11 @@ class UserSeeder extends Seeder
         $pegawaiId = $userModel->getInsertID();
 
         $groups = [
+            [
+                'user_id' => $adminId,
+                'group' => 'admin',
+                'created_at' => $now
+            ],
             [
                 'user_id' => $manajerId,
                 'group' => 'manajer',
@@ -77,6 +90,17 @@ class UserSeeder extends Seeder
         $groupModel->insertBatch($groups);
 
         $userIdentities = [
+            // Admin
+            [
+                'user_id' => $adminId,
+                'type' => 'email_password',
+                'name' => 'Admin',
+                'secret' => 'admin@gmail.com',
+                // Password : 123456789
+                'secret2' => '$2y$10$v5f4OFKyVBNsdmvZsUzHZOmGupJFivsmzgJrNrErhvdql0aiDH6M6',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
             // Manajer
             [
                 'user_id' => $manajerId,
