@@ -104,7 +104,7 @@
                         <li class="sidebar-title">Data Master</li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="<?= site_url('admin/obat') ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Data Obat</span>
                             </a>
