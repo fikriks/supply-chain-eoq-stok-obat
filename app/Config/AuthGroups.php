@@ -32,25 +32,20 @@ class AuthGroups extends ShieldAuthGroups
      * @see https://github.com/codeigniter4/shield/blob/develop/docs/quickstart.md#change-available-groups for more info
      */
     public array $groups = [
-        'superadmin' => [
-            'title'       => 'Super Admin',
-            'description' => 'Complete control of the site.',
-        ],
         'admin' => [
-            'title'       => 'Admin',
-            'description' => 'Day to day administrators of the site.',
+            'title'       => 'Admin'
         ],
-        'developer' => [
-            'title'       => 'Developer',
-            'description' => 'Site programmers.',
+        'manajer' => [
+            'title'       => 'Manajer'
         ],
-        'user' => [
-            'title'       => 'User',
-            'description' => 'General users of the site. Often customers.',
+        'staff' => [
+            'title'       => 'Staff'
         ],
-        'beta' => [
-            'title'       => 'Beta User',
-            'description' => 'Has access to beta-level features.',
+        'supplier' => [
+            'title'       => 'Supplier'
+        ],
+        'pegawai' => [
+            'title'       => 'Pegawai'
         ],
     ];
 
@@ -68,8 +63,7 @@ class AuthGroups extends ShieldAuthGroups
         'users.manage-admins' => 'Can manage other admins',
         'users.create'        => 'Can create new non-admin users',
         'users.edit'          => 'Can edit existing non-admin users',
-        'users.delete'        => 'Can delete existing non-admin users',
-        'beta.access'         => 'Can access beta-level features',
+        'users.delete'        => 'Can delete existing non-admin users'
     ];
 
     /**
@@ -81,28 +75,34 @@ class AuthGroups extends ShieldAuthGroups
      * This defines group-level permissions.
      */
     public array $matrix = [
-        'superadmin' => [
+        'admin' => [
             'admin.*',
             'users.*',
             'beta.*',
         ],
-        'admin' => [
+        'manajer' => [
             'admin.access',
             'users.create',
             'users.edit',
-            'users.delete',
-            'beta.access',
+            'users.delete'
         ],
-        'developer' => [
+        'staff' => [
             'admin.access',
-            'admin.settings',
             'users.create',
             'users.edit',
-            'beta.access',
+            'users.delete'
         ],
-        'user' => [],
-        'beta' => [
-            'beta.access',
+        'supplier' => [
+            'admin.access',
+            'users.create',
+            'users.edit',
+            'users.delete'
+        ],
+        'pegawai' => [
+            'admin.access',
+            'users.create',
+            'users.edit',
+            'users.delete'
         ],
     ];
 }

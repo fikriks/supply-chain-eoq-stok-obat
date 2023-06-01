@@ -41,6 +41,7 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($rou
     $routes->resource("kategori-obat", ['controller' => 'KategoriObat']);
     $routes->resource("obat", ['controller' => 'Obat']);
     $routes->resource("satuan", ['controller' => 'Satuan']);
+    $routes->resource("pengguna", ['controller' => 'Pengguna']);
 });
 
 service('auth')->routes($routes);
