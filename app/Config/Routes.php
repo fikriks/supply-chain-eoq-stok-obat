@@ -45,6 +45,7 @@ $routes->group("admin", ["filter" => "userFilter:admin", "namespace" => "App\Con
     $routes->resource("pengguna", ['controller' => 'Pengguna']);
 
     $routes->resource("pemesanan", ['controller' => 'Pemesanan']);
+    $routes->resource("permintaan-obat", ['controller' => 'PermintaanObat']);
 });
 
 service('auth')->routes($routes);

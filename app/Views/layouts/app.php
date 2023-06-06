@@ -78,6 +78,13 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item">
+                            <a href="<?= site_url('admin/permintaan-obat') ?>" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Permintaan Obat</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-title">Pengguna</li>
 
                         <li class="sidebar-item">
