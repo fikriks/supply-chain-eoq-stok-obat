@@ -93,10 +93,10 @@ Permintaan Obat
                                                     <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
                                                         <?= csrf_field() ?>
                                                         <input type="hidden" name="_method" value="PUT" />
-                                                        <input type="hidden" name="status" value="TERKIRIM" />
+                                                        <input type="hidden" name="status" value="DIKIRIM" />
                                                         <button type="submit" class="btn btn-warning col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-send-fill"></i></button>
                                                     </form>
-                                                <?php elseif ($p->status == "TERKIRIM") : ?>
+                                                <?php elseif ($p->status == "DIKIRIM") : ?>
                                                     <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
                                                         <?= csrf_field() ?>
                                                         <input type="hidden" name="_method" value="PUT" />

@@ -25,7 +25,11 @@ class Pemesanan extends ResourceController
      */
     public function index()
     {
-        $data['pemesanan'] = $this->model->withRelations();
+        $data = [
+            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI')->withRelations(),
+            'pesananDikirim' => $this->model->where('status', 'DIKIRIM')->withRelations(),
+            'pesananDiterima' => $this->model->where('status', 'SELESAI')->withRelations()
+        ];
 
         return view('admin/pemesanan/index', $data);
     }
