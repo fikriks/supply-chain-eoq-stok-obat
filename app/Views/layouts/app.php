@@ -62,32 +62,40 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-title">Perencanaan</li>
+                        <li class="sidebar-item">
+                            <a href="<?= site_url('admin/perencanaan') ?>" class='sidebar-link'>
+                                <i class="bi bi-calendar-check-fill"></i>
+                                <span>Perencanaan</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-title">Transaksi</li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/penjualan') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-cart-fill"></i>
                                 <span>Data Penjualan</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/pemesanan') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-bag-fill"></i>
                                 <span>Pemesanan Obat</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/permintaan-obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-basket-fill"></i>
                                 <span>Permintaan Obat</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/validasi-pemesanan') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-bag-check-fill"></i>
                                 <span>Validasi Pemesanan</span>
                             </a>
                         </li>
@@ -151,7 +159,7 @@
 
                         <li class="sidebar-item">
                             <a href="<?= site_url('logout') ?>" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-door-closed-fill"></i>
                                 <span>Logout</span>
                             </a>
                         </li>
@@ -180,10 +188,7 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
-                    </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a href="https://saugi.me">Saugi</a></p>
+                        <p><?= date('Y') ?> &copy; Apotek Erdza Farma</p>
                     </div>
                 </div>
             </footer>

@@ -29,11 +29,6 @@ class CreatePemesananTable extends Migration
                 'constraint'     => 11,
                 'unsigned'       => true
             ],
-            'user_id' => [
-                'type'       => 'INT',
-                'constraint'     => 11,
-                'unsigned'       => true
-            ],
             'qty' => [
                 'type'       => 'INT',
                 'constraint' => 11
@@ -60,8 +55,7 @@ class CreatePemesananTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addKey('kode', false, true);
         $this->forge->addForeignKey('obat_id', 'obat', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('supplier_id', 'supplier', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('supplier_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('pemesanan');
     }
 

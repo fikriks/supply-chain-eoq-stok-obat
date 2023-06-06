@@ -43,7 +43,9 @@ class Obat extends ResourceController
      */
     public function show($id = null)
     {
-        //
+        $data = $this->model->find($id);
+
+        echo json_encode($data);
     }
 
     /**
