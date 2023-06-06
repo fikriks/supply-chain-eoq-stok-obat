@@ -17,7 +17,7 @@ class PermintaanObat extends ResourceController
     {
         $data = [
             'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI')->withRelations(),
-            'permintaanKirimObat' => $this->model->where('status', 'TERKONFIRMASI')->orWhere('status', 'TERKIRIM')->withRelations(),
+            'permintaanKirimObat' => $this->model->where('status', 'TERKONFIRMASI')->orWhere('status', 'DIKIRIM')->withRelations(),
             'permintaanSukses' => $this->model->where('status', 'SELESAI')->withRelations()
         ];
 
