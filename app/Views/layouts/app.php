@@ -62,98 +62,115 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-title">Perencanaan</li>
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/perencanaan') ?>" class='sidebar-link'>
-                                <i class="bi bi-calendar-check-fill"></i>
-                                <span>Perencanaan</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('staff')) { ?>
+                            <li class="sidebar-title">Perencanaan</li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/perencanaan') ?>" class='sidebar-link'>
+                                    <i class="bi bi-calendar-check-fill"></i>
+                                    <span>Perencanaan</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
                         <li class="sidebar-title">Transaksi</li>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/penjualan') ?>" class='sidebar-link'>
-                                <i class="bi bi-cart-fill"></i>
-                                <span>Data Penjualan</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('admin')) { ?>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/penjualan') ?>" class='sidebar-link'>
+                                    <i class="bi bi-cart-fill"></i>
+                                    <span>Data Penjualan</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/pemesanan') ?>" class='sidebar-link'>
-                                <i class="bi bi-bag-fill"></i>
-                                <span>Pemesanan Obat</span>
-                            </a>
-                        </li>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/permintaan-obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-basket-fill"></i>
-                                <span>Permintaan Obat</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('staff')) { ?>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/pemesanan') ?>" class='sidebar-link'>
+                                    <i class="bi bi-bag-fill"></i>
+                                    <span>Pemesanan Obat</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/validasi-pemesanan') ?>" class='sidebar-link'>
-                                <i class="bi bi-bag-check-fill"></i>
-                                <span>Validasi Pemesanan</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('supplier')) { ?>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/permintaan-obat') ?>" class='sidebar-link'>
+                                    <i class="bi bi-basket-fill"></i>
+                                    <span>Permintaan Obat</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-title">Pengguna</li>
+                        <?php if (auth()->user()->inGroup('manajer')) { ?>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/validasi-pemesanan') ?>" class='sidebar-link'>
+                                    <i class="bi bi-bag-check-fill"></i>
+                                    <span>Validasi Pemesanan</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/pengguna') ?>" class='sidebar-link'>
-                                <i class="bi bi-people-fill"></i>
-                                <span>Data Pengguna</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('admin')) { ?>
+                            <li class="sidebar-title">Pengguna</li>
 
-                        <li class="sidebar-title">Data Master</li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/pengguna') ?>" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Data Pengguna</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-capsule"></i>
-                                <span>Data Obat</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('admin', 'staff')) { ?>
+                            <li class="sidebar-title">Data Master</li>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/kategori-obat') ?>" class='sidebar-link'>
-                                <i class="bi bi-bookmark-fill"></i>
-                                <span>Kategori Obat</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/obat') ?>" class='sidebar-link'>
+                                    <i class="bi bi-capsule"></i>
+                                    <span>Data Obat</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item">
-                            <a href="<?= site_url('admin/satuan') ?>" class='sidebar-link'>
-                                <i class="bi bi-archive-fill"></i>
-                                <span>Satuan Obat</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/kategori-obat') ?>" class='sidebar-link'>
+                                    <i class="bi bi-bookmark-fill"></i>
+                                    <span>Kategori Obat</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-title">Laporan</li>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/satuan') ?>" class='sidebar-link'>
+                                    <i class="bi bi-archive-fill"></i>
+                                    <span>Satuan Obat</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Laporan Penjualan</span>
-                            </a>
-                        </li>
+                        <?php if (auth()->user()->inGroup('manajer')) { ?>
+                            <li class="sidebar-title">Laporan</li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Laporan Pembelian</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item">
+                                <a href="index.html" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Laporan Penjualan</span>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Barang Masuk dan Keluar</span>
-                            </a>
-                        </li>
+                            <li class="sidebar-item">
+                                <a href="index.html" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Laporan Pembelian</span>
+                                </a>
+                            </li>
+
+                            <li class="sidebar-item">
+                                <a href="index.html" class='sidebar-link'>
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Barang Masuk dan Keluar</span>
+                                </a>
+                            </li>
+                        <?php } ?>
 
                         <li class="sidebar-title">Logout</li>
 
