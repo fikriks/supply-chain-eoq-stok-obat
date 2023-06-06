@@ -48,6 +48,9 @@ Laporan Pemesanan
     </div>
 
     <div class="card">
+        <div class="card-header">
+            <a href="<?= site_url('admin/laporan-barang-masuk-keluar/pdf') ?>" class="btn btn-primary">Export PDF</a>
+        </div>
         <div class="card-body">
             <table class="table" id="table1">
                 <thead>

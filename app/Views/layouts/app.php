@@ -167,7 +167,7 @@
                             <li class="sidebar-item">
                                 <a href="<?= site_url('admin/laporan-barang-masuk-keluar') ?>" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
-                                    <span>Barang Masuk dan Keluar</span>
+                                    <span>Laporan Barang Masuk dan Keluar</span>
                                 </a>
                             </li>
                         <?php } ?>
