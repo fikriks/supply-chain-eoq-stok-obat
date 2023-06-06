@@ -38,6 +38,9 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($rou
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
 
+    $routes->get('penjualan/rest-obat/(:num)', 'Penjualan::restObat/$1');
+    $routes->resource("penjualan", ['controller' => 'Penjualan']);
+
     $routes->resource("kategori-obat", ['controller' => 'KategoriObat']);
     $routes->resource("obat", ['controller' => 'Obat']);
     $routes->resource("satuan", ['controller' => 'Satuan']);

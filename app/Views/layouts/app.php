@@ -65,7 +65,7 @@
                         <li class="sidebar-title">Transaksi</li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="<?= site_url('admin/penjualan') ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Data Penjualan</span>
                             </a>
@@ -178,6 +178,8 @@
 
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
     <script src="<?= base_url('assets/js/pages/datatables.js') ?>"></script>
+
+    <?= $this->renderSection('scripts') ?>
 </body>
 
 </html>

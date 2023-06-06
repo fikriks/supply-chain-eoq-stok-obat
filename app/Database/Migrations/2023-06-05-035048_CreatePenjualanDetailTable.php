@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreatePenjualanTable extends Migration
+class CreatePenjualanDetailTable extends Migration
 {
     public function up()
     {
@@ -15,29 +15,27 @@ class CreatePenjualanTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'kode' => [
-                'type'       => 'VARCHAR',
-                'constraint'     => 191
-            ],
-            'user_id' => [
+            'penjualan_id' => [
                 'type'       => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true
             ],
-            'tanggal' => [
-                'type'       => 'DATE'
+            'obat_id' => [
+                'type'       => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true
+            ],
+            'qty' => [
+                'type'       => 'INT',
+                'constraint' => 11
+            ],
+            'harga' => [
+                'type'       => 'INT',
+                'constraint' => 11
             ],
             'total_harga' => [
                 'type'       => 'INT',
-                'constraint'     => 11
-            ],
-            'bayar' => [
-                'type'       => 'INT',
-                'constraint'     => 11
-            ],
-            'kembalian' => [
-                'type'       => 'INT',
-                'constraint'     => 11
+                'constraint' => 11
             ],
             'created_at' => [
                 'type'       => 'DATETIME'
@@ -51,13 +49,13 @@ class CreatePenjualanTable extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addKey('kode', false, true);
-        $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('penjualan');
+        $this->forge->addForeignKey('penjualan_id', 'penjualan', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('obat_id', 'obat', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->createTable('penjualan_detail');
     }
 
     public function down()
     {
-        $this->forge->dropTable('penjualan');
+        $this->forge->dropTable('penjualan_detail');
     }
 }
