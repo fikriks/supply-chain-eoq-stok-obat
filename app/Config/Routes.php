@@ -32,7 +32,7 @@ $routes->set404Override();
 $routes->get('/', '\CodeIgniter\Shield\Controllers\LoginController::loginView', ['as' => 'login']);
 $routes->post('/', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');
 
-$routes->group("admin", ["filter" => "userFilter:admin", "namespace" => "App\Controllers\Admin"], function ($routes) {
+$routes->group("admin", ["filter" => "userFilter:admin,manajer,staff,supplier", "namespace" => "App\Controllers\Admin"], function ($routes) {
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
 
