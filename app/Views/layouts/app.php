@@ -74,7 +74,7 @@
                         <li class="sidebar-item">
                             <a href="<?= site_url('admin/pemesanan') ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
-                                <span>Pemesanan</span>
+                                <span>Pemesanan Obat</span>
                             </a>
                         </li>
 
@@ -82,6 +82,13 @@
                             <a href="<?= site_url('admin/permintaan-obat') ?>" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Permintaan Obat</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="<?= site_url('admin/validasi-pemesanan') ?>" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Validasi Pemesanan</span>
                             </a>
                         </li>
 

@@ -6,6 +6,8 @@ use CodeIgniter\RESTful\ResourceController;
 
 class ValidasiPemesanan extends ResourceController
 {
+    protected $modelName = 'App\Models\Pemesanan';
+
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -13,7 +15,9 @@ class ValidasiPemesanan extends ResourceController
      */
     public function index()
     {
-        //
+        $data['pemesanan'] = $this->model->where('status', 'MENUNGGU_KONFIRMASI')->withRelations();
+
+        return view('admin/validasi-pemesanan/index', $data);
     }
 
     /**
@@ -63,7 +67,15 @@ class ValidasiPemesanan extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $result =  $this->model->update($id, $this->request->getPost());
+
+        if ($result) {
+            session()->setFlashdata('message', 'Edit Data Berhasil');
+        } else {
+            session()->setFlashdata('error', 'Edit Data Tidak Berhasil');
+        }
+
+        return redirect()->to('admin/validasi-pemesanan');
     }
 
     /**

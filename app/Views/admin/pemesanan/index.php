@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('title') ?>
-Pemesanan
+Pemesanan Obat
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
