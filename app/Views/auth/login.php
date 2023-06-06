@@ -6,6 +6,7 @@
 
         <div id="auth-left">
             <div class="auth-logo">
+                <img src="<?= base_url('assets/images/logo/logo.png') ?>" alt="Logo" style="height:100px;width:150px;object-fit:cover">
             </div>
 
             <h1 class="auth-title">Log in.</h1>

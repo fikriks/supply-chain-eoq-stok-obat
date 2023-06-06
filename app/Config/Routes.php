@@ -29,12 +29,10 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-
 $routes->get('/', '\CodeIgniter\Shield\Controllers\LoginController::loginView', ['as' => 'login']);
 $routes->post('/', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');
 
-$routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($routes) {
+$routes->group("admin", ["filter" => "userFilter:admin", "namespace" => "App\Controllers\Admin"], function ($routes) {
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
 
@@ -45,6 +43,8 @@ $routes->group("admin", ["namespace" => "App\Controllers\Admin"], function ($rou
     $routes->resource("obat", ['controller' => 'Obat']);
     $routes->resource("satuan", ['controller' => 'Satuan']);
     $routes->resource("pengguna", ['controller' => 'Pengguna']);
+
+    $routes->resource("pemesanan", ['controller' => 'Pemesanan']);
 });
 
 service('auth')->routes($routes);
