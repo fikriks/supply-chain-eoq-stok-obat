@@ -51,6 +51,7 @@ $routes->group("admin", ["filter" => "userFilter:admin,manajer,staff,supplier", 
 
     $routes->get('laporan-penjualan', 'LaporanPenjualan::index');
     $routes->get('laporan-pemesanan', 'LaporanPemesanan::index');
+    $routes->get('laporan-barang-masuk-keluar', 'LaporanBarangMasukKeluar::index');
 });
 
 service('auth')->routes($routes);

@@ -49,4 +49,15 @@ class Obat extends Model
 
         return $this;
     }
+
+    public function withRelationsMasukKeluar()
+    {
+        $this->select("{$this->table}.*, obat.kode AS kode_obat, obat.nama AS nama_obat, pemesanan.*, pemesanan.qty AS qty_pemesanan, pemesanan.total_harga AS total_harga_pemesanan, penjualan_detail.*, penjualan_detail.qty AS qty_penjualan_detail, penjualan_detail.total_harga AS total_harga_penjualan_detail");
+
+        $data = $this->join('pemesanan', 'pemesanan.obat_id = obat.id')
+            ->join('penjualan_detail', 'penjualan_detail.obat_id = obat.id')
+            ->findAll();
+
+        return $data;
+    }
 }
