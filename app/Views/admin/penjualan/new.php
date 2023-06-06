@@ -9,7 +9,7 @@ Tambah Penjualan
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <a href="<?= site_url('admin/kategori-obat') ?>" class="btn btn-primary">Kembali</a>
+            <a href="<?= site_url('admin/penjualan') ?>" class="btn btn-primary">Kembali</a>
         </div>
         <div class="card-body">
             <form action="<?= site_url('admin/penjualan') ?>" method="POST" class="form" enctype="multipart/form-data" id="addData">

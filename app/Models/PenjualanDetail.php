@@ -39,6 +39,18 @@ class PenjualanDetail extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+    function withRelationsAll()
+    {
+        $this->select('penjualan_detail.*, penjualan_detail.total_harga AS total_harga_penjualan_detail, penjualan.*, penjualan.kode as penjualan_kode, penjualan.total_harga AS total_harga_penjualan, users.*, obat.*, obat.kode AS kode_obat, obat.nama AS nama_obat');
+
+        $data = $this->join('penjualan', 'penjualan.id = penjualan_detail.penjualan_id')
+            ->join('users', 'users.id = penjualan.user_id')
+            ->join('obat', 'obat.id = penjualan_detail.obat_id')
+            ->findAll();
+
+        return $data;
+    }
+
     function withRelations($id = '')
     {
         $this->select('penjualan_detail.*, penjualan_detail.total_harga AS total_harga_penjualan_detail, penjualan.*, penjualan.kode as penjualan_kode, penjualan.total_harga AS total_harga_penjualan, users.*, obat.*, obat.kode AS kode_obat, obat.nama AS nama_obat');

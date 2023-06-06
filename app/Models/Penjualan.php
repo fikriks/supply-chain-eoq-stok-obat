@@ -41,9 +41,11 @@ class Penjualan extends Model
 
     function withRelations()
     {
-        $this->select('penjualan.*, users.*');
+        $this->select('penjualan.*, users.*, penjualan_detail.*, obat.*');
 
         $data = $this->join('users', 'users.id = penjualan.user_id')
+            ->join('penjualan_detail', 'penjualan_detail.penjualan_id = penjualan.id')
+            ->join('obat', 'obat.id = penjualan_detail.obat_id')
             ->findAll();
 
         return $data;

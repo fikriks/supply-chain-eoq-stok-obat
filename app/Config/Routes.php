@@ -48,6 +48,8 @@ $routes->group("admin", ["filter" => "userFilter:admin,manajer,staff,supplier", 
     $routes->resource("permintaan-obat", ['controller' => 'PermintaanObat']);
     $routes->resource("validasi-pemesanan", ['controller' => 'ValidasiPemesanan']);
     $routes->resource("perencanaan", ['controller' => 'Perencanaan']);
+
+    $routes->get('laporan-penjualan', 'LaporanPenjualan::index');
 });
 
 service('auth')->routes($routes);

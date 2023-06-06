@@ -151,7 +151,7 @@
                             <li class="sidebar-title">Laporan</li>
 
                             <li class="sidebar-item">
-                                <a href="index.html" class='sidebar-link'>
+                                <a href="<?= site_url('admin/laporan-penjualan') ?>" class='sidebar-link'>
                                     <i class="bi bi-grid-fill"></i>
                                     <span>Laporan Penjualan</span>
                                 </a>
