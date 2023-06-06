@@ -15,6 +15,9 @@ class CreatePemesananTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'tanggal' => [
+                'type'       => 'DATE'
+            ],
             'kode' => [
                 'type'       => 'VARCHAR',
                 'constraint'     => 191

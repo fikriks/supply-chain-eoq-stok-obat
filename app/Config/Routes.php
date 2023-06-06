@@ -50,6 +50,7 @@ $routes->group("admin", ["filter" => "userFilter:admin,manajer,staff,supplier", 
     $routes->resource("perencanaan", ['controller' => 'Perencanaan']);
 
     $routes->get('laporan-penjualan', 'LaporanPenjualan::index');
+    $routes->get('laporan-pemesanan', 'LaporanPemesanan::index');
 });
 
 service('auth')->routes($routes);

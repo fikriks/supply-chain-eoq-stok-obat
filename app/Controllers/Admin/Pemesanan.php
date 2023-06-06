@@ -80,7 +80,7 @@ class Pemesanan extends ResourceController
 
         $request = $this->request->getPost();
         $hargaObat = $this->Obat->find($request['obat_id'])->harga_beli;
-        $request['user_id'] = auth()->id();
+        $request['supplier_id'] = auth()->id();
         $request['total_harga'] = $request['qty'] * $hargaObat;
         $request['status'] = "MENUNGGU_KONFIRMASI";
 
@@ -130,7 +130,7 @@ class Pemesanan extends ResourceController
         }
 
         $request = $this->request->getPost();
-        $request['user_id'] = auth()->id();
+        $request['supplier_id'] = auth()->id();
 
         $result =  $this->model->update($id, $request);
 

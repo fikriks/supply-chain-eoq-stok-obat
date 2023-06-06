@@ -40,6 +40,7 @@ Pemesanan Obat
                         <table class="table" id="table1">
                             <thead>
                                 <tr>
+                                    <th>Tanggal</th>
                                     <th>Kode</th>
                                     <th>Obat</th>
                                     <th>Supplier</th>
@@ -54,6 +55,7 @@ Pemesanan Obat
                             <tbody>
                                 <?php foreach ($permintaanMenungguKonfirmasi as $p) : ?>
                                     <tr>
+                                        <td><?= $p->tanggal ?></td>
                                         <td><?= $p->kode_pemesanan ?></td>
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>
@@ -83,6 +85,7 @@ Pemesanan Obat
                         <table class="table" id="table2">
                             <thead>
                                 <tr>
+                                    <th>Tanggal</th>
                                     <th>Kode</th>
                                     <th>Obat</th>
                                     <th>Supplier</th>
@@ -95,6 +98,7 @@ Pemesanan Obat
                             <tbody>
                                 <?php foreach ($pesananDikirim as $p) : ?>
                                     <tr>
+                                        <td><?= $p->tanggal ?></td>
                                         <td><?= $p->kode_pemesanan ?></td>
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>
@@ -113,6 +117,7 @@ Pemesanan Obat
                         <table class="table" id="table3">
                             <thead>
                                 <tr>
+                                    <th>Tanggal</th>
                                     <th>Kode</th>
                                     <th>Obat</th>
                                     <th>Supplier</th>
@@ -125,6 +130,7 @@ Pemesanan Obat
                             <tbody>
                                 <?php foreach ($pesananDiterima as $p) : ?>
                                     <tr>
+                                        <td><?= $p->tanggal ?></td>
                                         <td><?= $p->kode_pemesanan ?></td>
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>

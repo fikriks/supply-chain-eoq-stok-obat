@@ -13,7 +13,7 @@ class Pemesanan extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['kode', 'obat_id', 'supplier_id', 'user_id', 'qty', 'total_harga', 'status'];
+    protected $allowedFields    = ['tanggal', 'kode', 'obat_id', 'supplier_id', 'user_id', 'qty', 'total_harga', 'status'];
 
     // Dates
     protected $useTimestamps = true;
@@ -41,7 +41,7 @@ class Pemesanan extends Model
 
     function withRelations()
     {
-        $this->select('pemesanan.*, pemesanan.id as pemesanan_id, obat.*, auth_identities.*, pemesanan.kode AS kode_pemesanan');
+        $this->select('pemesanan.*, pemesanan.id as pemesanan_id, pemesanan.kode AS pemesanan_kode, obat.*, obat.nama AS nama_obat, auth_identities.*, pemesanan.kode AS kode_pemesanan');
 
         $data = $this->join('obat', 'obat.id = pemesanan.obat_id')
             ->join('auth_identities', 'auth_identities.user_id = obat.supplier_id')

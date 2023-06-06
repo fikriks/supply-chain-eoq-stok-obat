@@ -5,7 +5,6 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 
 use App\Models\PenjualanDetail;
-use App\Models\Penjualan;
 
 class LaporanPenjualan extends BaseController
 {
@@ -13,7 +12,7 @@ class LaporanPenjualan extends BaseController
 
     public function __construct()
     {
-        $this->PenjualanDetail = new PenjualanDetail;
+        $this->PenjualanDetail = new PenjualanDetail();
     }
 
     public function index()

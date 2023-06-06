@@ -16,6 +16,12 @@ Tambah Pemesanan Obat
                 <div class="form-body">
                     <div class="row">
                         <div class="col-md-4">
+                            <label>Tanggal</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="date" class="form-control" name="tanggal" value="<?= old('tanggal') ?? date('Y-m-d') ?>" readonly required>
+                        </div>
+                        <div class="col-md-4">
                             <label>Kode Pemesanan</label>
                         </div>
                         <div class="col-md-8 form-group">
