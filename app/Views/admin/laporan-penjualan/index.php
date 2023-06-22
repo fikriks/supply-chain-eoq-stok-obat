@@ -71,9 +71,9 @@ Laporan Penjualan
                             <td><?= $po->penjualan_kode ?></td>
                             <td><?= $po->nama_obat ?></td>
                             <td><?= $po->qty ?></td>
-                            <td><?= $po->harga_jual ?></td>
-                            <td><?= $po->harga_beli ?></td>
-                            <td><?= $po->harga_beli - $po->harga_jual ?></td>
+                            <td><?= number_format($po->harga_jual, 2, ',', '.') ?></td>
+                            <td><?= number_format($po->harga_beli, 2, ',', '.') ?></td>
+                            <td><?= number_format($po->harga_beli - $po->harga_jual, 2, ',', '.') ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

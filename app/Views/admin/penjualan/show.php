@@ -39,9 +39,9 @@ Detail Penjualan
                         <tr>
                             <td><?= $p->kode_obat ?></td>
                             <td><?= $p->nama_obat ?></td>
-                            <td><?= $p->harga_jual ?></td>
+                            <td><?= number_format($p->harga_jual, 2, ',', '.') ?></td>
                             <td><?= $p->qty ?></td>
-                            <td><?= $p->total_harga_penjualan_detail ?></td>
+                            <td><?= number_format($p->total_harga_penjualan_detail, 2, ',', '.') ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
@@ -49,9 +49,9 @@ Detail Penjualan
 
             <div class="d-flex justify-content-end">
                 <div>
-                    <h5>Total: <?= $penjualan->total_harga ?></h5>
-                    <h5>Bayar: <?= $penjualan->bayar ?></h5>
-                    <h5>Kembalian: <?= $penjualan->kembalian ?></h5>
+                    <h5>Total: <?= number_format($penjualan->total_harga, 2, ',', '.') ?></h5>
+                    <h5>Bayar: <?= number_format($penjualan->bayar, 2, ',', '.') ?></h5>
+                    <h5>Kembalian: <?= number_format($penjualan->kembalian, 2, ',', '.') ?></h5>
                 </div>
             </div>
         </div>

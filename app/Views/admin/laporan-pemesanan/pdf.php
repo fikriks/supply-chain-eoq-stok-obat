@@ -28,12 +28,13 @@
             <?php foreach ($pemesanan as $po) : ?>
                 <tr style="text-align: center;">
                     <td><?= $po->tanggal ?></td>
+                    <td><?= $po->nama_supplier ?></td>
                     <td><?= $po->pemesanan_kode ?></td>
                     <td><?= $po->nama_obat ?></td>
                     <td><?= $po->qty ?></td>
                     <td><?= $po->expired ?></td>
-                    <td><?= $po->harga_beli ?></td>
-                    <td><?= $po->harga_beli * $po->qty ?></td>
+                    <td><?= number_format($po->harga_beli, 2, ',', '.') ?></td>
+                    <td><?= number_format($po->harga_beli * $po->qty, 2, ',', '.') ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
