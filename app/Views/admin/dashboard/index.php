@@ -20,7 +20,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Masuk</h6>
-                                    <h6 class="font-extrabold mb-0">112.000</h6>
+                                    <h6 class="font-extrabold mb-0"><?= count($barangMasuk) ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Keluar</h6>
-                                    <h6 class="font-extrabold mb-0">183.000</h6>
+                                    <h6 class="font-extrabold mb-0"><?= count($barangKeluar) ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Transaksi</h6>
-                                    <h6 class="font-extrabold mb-0">80.000</h6>
+                                    <h6 class="font-extrabold mb-0"><?= count($barangMasuk) + count($barangKeluar) ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -65,10 +65,10 @@ Dashboard
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Barang Masuk dan Barang Keluar Tahun 2023</h4>
+                            <h4>Barang Masuk dan Barang Keluar Tahun <?= date('Y') ?></h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            <div id="chart-barang-masuk-barang-keluar"></div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ Dashboard
                     <h4>Stok Obat</h4>
                 </div>
                 <div class="card-body">
-                    <div id="chart-visitors-profile"></div>
+                    <div id="chart-stok-obat"></div>
                 </div>
             </div>
         </div>
@@ -257,3 +257,60 @@ Dashboard
     </section>
 <?php } ?>
 <?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<?php if (auth()->user()->inGroup('admin', 'manajer')) { ?>
+    <script>
+        var optionsBarangMasukBarangKeluar = {
+            annotations: {
+                position: 'back'
+            },
+            dataLabels: {
+                enabled: false
+            },
+            chart: {
+                type: 'bar',
+                height: 300
+            },
+            fill: {
+                opacity: 1
+            },
+            plotOptions: {},
+            series: [{
+                name: 'Total Barang Masuk dan Keluar',
+                data: <?= json_encode($totalBarangMasukKeluar) ?>
+            }],
+            xaxis: {
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            },
+            colors: '#435ebe',
+        };
+
+        let optionsStokObat = {
+            series: <?= json_encode($stokObat) ?>,
+            labels: <?= json_encode($namaObat) ?>,
+            chart: {
+                type: 'donut',
+                width: '100%',
+                height: '350px'
+            },
+            legend: {
+                position: 'bottom'
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '30%'
+                    }
+                }
+            }
+        }
+
+        var chartBarangMasukBarangKeluar = new ApexCharts(document.querySelector("#chart-barang-masuk-barang-keluar"), optionsBarangMasukBarangKeluar);
+        var chartStokObat = new ApexCharts(document.getElementById('chart-stok-obat'), optionsStokObat)
+
+        chartBarangMasukBarangKeluar.render();
+        chartStokObat.render();
+        <?php } ?>
+    </script>
+    <?= $this->endSection() ?>
