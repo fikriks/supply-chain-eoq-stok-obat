@@ -60,7 +60,7 @@ Pemesanan Obat
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
-                                        <td><?= $p->total_harga ?></td>
+                                        <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
                                         <td><?= str_replace('_', ' ', $p->status) ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
@@ -103,7 +103,7 @@ Pemesanan Obat
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
-                                        <td><?= $p->total_harga ?></td>
+                                        <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
                                     </tr>
@@ -135,7 +135,7 @@ Pemesanan Obat
                                         <td><?= $p->nama ?></td>
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
-                                        <td><?= $p->total_harga ?></td>
+                                        <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
                                     </tr>

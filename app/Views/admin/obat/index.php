@@ -73,8 +73,8 @@ Obat
                             <td><?= $o->nama_supplier ?></td>
                             <td><?= $o->stok ?></td>
                             <td><?= $o->expired ?></td>
-                            <td><?= $o->harga_beli ?></td>
-                            <td><?= $o->harga_jual ?></td>
+                            <td><?= number_format($o->harga_beli, 2, ',', '.') ?></td>
+                            <td><?= number_format($o->harga_jual, 2, ',', '.') ?></td>
                             <td><?= $o->created_at ?></td>
                             <td><?= $o->updated_at ?></td>
                             <td>

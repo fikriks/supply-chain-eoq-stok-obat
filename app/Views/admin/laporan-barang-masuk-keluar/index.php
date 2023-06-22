@@ -75,11 +75,11 @@ Laporan Pemesanan
                             <td><?= $o->qty_pemesanan ?></td>
                             <td><?= $o->qty_penjualan_detail ?></td>
                             <td><?= $o->qty_pemesanan - $o->qty_penjualan_detail ?></td>
-                            <td><?= $o->harga_beli ?></td>
-                            <td><?= $o->harga_jual ?></td>
-                            <td><?= $o->total_harga_pemesanan ?></td>
-                            <td><?= $o->total_harga_penjualan_detail ?></td>
-                            <td><?= $o->total_harga_penjualan_detail - $o->total_harga_pemesanan ?></td>
+                            <td><?= number_format($o->harga_beli, 2, ',', '.') ?></td>
+                            <td><?= number_format($o->harga_jual, 2, ',', '.') ?></td>
+                            <td><?= number_format($o->total_harga_pemesanan, 2, ',', '.') ?></td>
+                            <td><?= number_format($o->total_harga_penjualan_detail, 2, ',', '.') ?></td>
+                            <td><?= number_format($o->total_harga_penjualan_detail - $o->total_harga_pemesanan, 2, ',', '.') ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>

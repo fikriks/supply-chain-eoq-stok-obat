@@ -15,13 +15,12 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/pages/datatables.css') ?>">
-
 </head>
 
 <body>
     <div id="app">
         <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
+            <div class="sidebar-wrapper active bg-light">
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
@@ -217,7 +216,7 @@
 
     <!-- Need: Apexcharts -->
     <script src="<?= base_url('assets/extensions/apexcharts/apexcharts.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/pages/dashboard.js') ?>"></script>
+    <!-- <script src="<?= base_url('assets/js/pages/dashboard.js') ?>"></script> -->
 
     <script src="https://cdn.datatables.net/v/bs5/dt-1.12.1/datatables.min.js"></script>
     <script src="<?= base_url('assets/js/pages/datatables.js') ?>"></script>
