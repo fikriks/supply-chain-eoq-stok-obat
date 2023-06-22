@@ -115,7 +115,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Masuk</h6>
-                                    <h6 class="font-extrabold mb-0">112.000</h6>
+                                    <h6 class="font-extrabold mb-0"><?= count($barangMasuk) ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Keluar</h6>
-                                    <h6 class="font-extrabold mb-0">183.000</h6>
+                                    <h6 class="font-extrabold mb-0"><?= count($barangKeluar) ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -158,10 +158,10 @@ Dashboard
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Barang Masuk dan Barang Keluar Tahun 2023</h4>
+                            <h4>Barang Masuk dan Barang Keluar Tahun <?= date('Y') ?></h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-profile-visit"></div>
+                            <div id="chart-barang-masuk-barang-keluar"></div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ Dashboard
                     <h4>Stok Obat</h4>
                 </div>
                 <div class="card-body">
-                    <div id="chart-visitors-profile"></div>
+                    <div id="chart-stok-obat"></div>
                 </div>
             </div>
         </div>
@@ -259,7 +259,7 @@ Dashboard
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<?php if (auth()->user()->inGroup('admin', 'manajer')) { ?>
+<?php if (auth()->user()->inGroup('admin', 'manajer', 'staff')) { ?>
     <script>
         var optionsBarangMasukBarangKeluar = {
             annotations: {

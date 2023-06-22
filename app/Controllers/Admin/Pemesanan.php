@@ -26,9 +26,9 @@ class Pemesanan extends ResourceController
     public function index()
     {
         $data = [
-            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI')->withRelations(),
+            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI_SUPPLIER')->withRelations(),
             'pesananDikirim' => $this->model->where('status', 'DIKIRIM')->withRelations(),
-            'pesananDiterima' => $this->model->where('status', 'SELESAI')->withRelations()
+            'pesananDiterima' => $this->model->where('status', 'PESANAN_DITERIMA')->withRelations()
         ];
 
         return view('admin/pemesanan/index', $data);
@@ -82,7 +82,7 @@ class Pemesanan extends ResourceController
         $hargaObat = $this->Obat->find($request['obat_id'])->harga_beli;
         $request['supplier_id'] = auth()->id();
         $request['total_harga'] = $request['qty'] * $hargaObat;
-        $request['status'] = "MENUNGGU_KONFIRMASI";
+        $request['status'] = "MENUNGGU_KONFIRMASI_SUPPLIER";
 
         $result = $this->model->save($request);
 
@@ -118,6 +118,27 @@ class Pemesanan extends ResourceController
      */
     public function update($id = null)
     {
+        if ($this->request->getPost('status')) {
+            $result =  $this->model->update($id, $this->request->getPost());
+
+            // Pengurangan Stok
+            $obat = $this->Obat->find($this->request->getPost('obat_id'));
+            $stok = $obat->stok + $this->request->getPost('kuantitas');
+
+            $this->Obat->update($obat->id, [
+                'stok' => $stok
+            ]);
+            // End Pengurangan Stok
+
+            if ($result) {
+                session()->setFlashdata('message', 'Edit Data Berhasil');
+            } else {
+                session()->setFlashdata('error', 'Edit Data Tidak Berhasil');
+            }
+
+            return redirect()->to('admin/pemesanan');
+        }
+
         if (!$this->validate([
             'kode' => 'required',
             'obat_id' => 'required',

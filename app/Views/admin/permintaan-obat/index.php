@@ -43,8 +43,10 @@ Permintaan Obat
                                     <th>Supplier</th>
                                     <th>Qty</th>
                                     <th>Total Harga</th>
+                                    <th>Status</th>
                                     <th>Dibuat</th>
                                     <th>Diedit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,8 +58,19 @@ Permintaan Obat
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
                                         <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
+                                        <td><?= str_replace('_', ' ', $p->status) ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
+                                        <td>
+                                            <div class="row">
+                                                <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
+                                                    <?= csrf_field() ?>
+                                                    <input type="hidden" name="_method" value="PUT" />
+                                                    <input type="hidden" name="status" value="TERKONFIRMASI" />
+                                                    <button type="submit" class="btn btn-success col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-check"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -75,6 +88,7 @@ Permintaan Obat
                                     <th>Supplier</th>
                                     <th>Qty</th>
                                     <th>Total Harga</th>
+                                    <th>Status</th>
                                     <th>Dibuat</th>
                                     <th>Diedit</th>
                                     <th>Aksi</th>
@@ -89,6 +103,7 @@ Permintaan Obat
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
                                         <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
+                                        <td><?= str_replace('_', ' ', $p->status) ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
                                         <td>
@@ -99,13 +114,6 @@ Permintaan Obat
                                                         <input type="hidden" name="_method" value="PUT" />
                                                         <input type="hidden" name="status" value="DIKIRIM" />
                                                         <button type="submit" class="btn btn-warning col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-send-fill"></i></button>
-                                                    </form>
-                                                <?php elseif ($p->status == "DIKIRIM") : ?>
-                                                    <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
-                                                        <?= csrf_field() ?>
-                                                        <input type="hidden" name="_method" value="PUT" />
-                                                        <input type="hidden" name="status" value="SELESAI" />
-                                                        <button type="submit" class="btn btn-success col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-check"></i></button>
                                                     </form>
                                                 <?php endif ?>
                                             </div>
@@ -127,6 +135,7 @@ Permintaan Obat
                                     <th>Supplier</th>
                                     <th>Qty</th>
                                     <th>Total Harga</th>
+                                    <th>Status</th>
                                     <th>Dibuat</th>
                                     <th>Diedit</th>
                                 </tr>
@@ -140,6 +149,7 @@ Permintaan Obat
                                         <td><?= $p->name ?></td>
                                         <td><?= $p->qty ?></td>
                                         <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
+                                        <td><?= str_replace('_', ' ', $p->status) ?></td>
                                         <td><?= $p->created_at ?></td>
                                         <td><?= $p->updated_at ?></td>
                                     </tr>

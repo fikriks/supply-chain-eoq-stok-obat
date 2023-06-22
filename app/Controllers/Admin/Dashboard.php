@@ -21,7 +21,7 @@ class Dashboard extends BaseController
 
     public function index()
     {
-        if (auth()->user()->inGroup('admin', 'manajer')) {
+        if (auth()->user()->inGroup('admin', 'manajer', 'staff')) {
             $obat = $this->Obat->findAll();
 
             foreach ($obat as $ob) {
