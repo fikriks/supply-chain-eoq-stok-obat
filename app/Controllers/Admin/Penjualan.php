@@ -87,6 +87,15 @@ class Penjualan extends ResourceController
                 'total_harga'        => $data['total'][$no],
             ];
 
+            // Pengurangan Stok
+            $obat = $this->Obat->where('kode', $data['kode_produk'][$no])->first();
+            $stok = $obat->stok - $data['kuantitas'][$no];
+
+            $this->Obat->update($obat->id, [
+                'stok' => $stok
+            ]);
+            // End Pengurangan Stok
+
             $this->PenjualanDetail->save($requestPenjualanDetail);
         }
 

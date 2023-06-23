@@ -233,7 +233,15 @@ Tambah Penjualan
     function totalHargaRow(kodeProduk) {
         let total = 0;
         let kuantitas = $('#qty-' + kodeProduk).val();
+        let stok = $('#stok').val();
         let harga = $('#harga-' + kodeProduk).val();
+
+        if (kuantitas > stok) {
+            $('#qty-' + kodeProduk).val('0');
+            alert('Penjualan melebihi stok yang ada');
+
+            return false;
+        }
 
         if (parseInt(kuantitas) > 0) {
             total = kuantitas * harga;

@@ -5,15 +5,19 @@ namespace App\Controllers\Admin;
 use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\Obat;
+use App\Models\Pemesanan;
+use App\Models\PenjualanDetail;
 
 class Perencanaan extends ResourceController
 {
-    private $Obat;
+    private $Obat, $Pemesanan, $PenjualanDetail;
     protected $modelName = 'App\Models\Perencanaan';
 
     public function __construct()
     {
         $this->Obat = new Obat();
+        $this->Pemesanan = new Pemesanan();
+        $this->PenjualanDetail = new PenjualanDetail();
     }
 
     /**
@@ -51,24 +55,7 @@ class Perencanaan extends ResourceController
      */
     public function new()
     {
-        // $baris1 = 2 * 531 * 5000;
-        // $baris2 = 23673 * (2 / 100);
-        // $eoq = $baris1 / $baris2;
-        // $eoq = ceil($eoq);
-        // $eoq = round(sqrt($eoq));
-        // $frekuensi = round(531 / $eoq);
-        // $daurUlangPemesanan = round(365 / $frekuensi);
-
-        // $bil1 = (24 * 2);
-        // $bil2 = (11 * 1);
-        // $ss = $bil1 - $bil2;
-
-        // $leadTime = 1;
-        // $au = 251 / 365;
-        // $rop = ($leadTime * $au);
-        // $rop = $rop + $ss;
-
-        // $maximumInventory = $ss + $eoq;
+        //
     }
 
     /**
@@ -78,26 +65,58 @@ class Perencanaan extends ResourceController
      */
     public function create()
     {
-        $baris1 = 2 * $this->request->getPost('permintaan') * $this->request->getPost('biaya_pemesanan');
-        $baris2 = $this->request->getPost('harga') * ($this->request->getPost('biaya_penyimpanan') / 100);
+        $permintaan = 0;
+        $avarangeUse = 0;
+        $biayaPemesanan = 20000;
+        $biayaPenyimpanan = 80000;
+        $leadTimeTertinggi = 3;
+        $rataRataLeadTime = 1;
+        $obat = $this->Obat->find($this->request->getPost('obat_id'));
+        $pemesanan = $this->Pemesanan->where('obat_id', $obat->id)->where('status', 'PESANAN_DITERIMA')->where('YEAR(tanggal)', date('Y'))->findAll();
+        $penjualanHarianTertinggi = $this->PenjualanDetail->selectMax('qty')->where('obat_id', $obat->id)->first()->qty;
+        $rataRataPenjualanHarian = $this->PenjualanDetail->selectAvg('qty')->where('obat_id', $obat->id)->first()->qty;
+        $penjualan = $this->PenjualanDetail->where('obat_id', $obat->id)->where('YEAR(created_at)', date('Y'))->findAll();
+
+        foreach ($pemesanan as $pmsn) {
+            $permintaan += $pmsn->qty;
+        }
+
+        foreach ($penjualan as $pnjl) {
+            $avarangeUse += $pnjl->qty;
+        }
+
+        // EOQ
+        $baris1 = 2 * $permintaan * $biayaPemesanan;
+        $baris2 = $obat->harga_jual * $biayaPenyimpanan;
         $eoq = $baris1 / $baris2;
         $eoq = ceil($eoq);
         $eoq = round(sqrt($eoq));
-        $frekuensi = round($this->request->getPost('permintaan') / $eoq);
+        $frekuensi = round($permintaan / $eoq);
         $daurUlangPemesanan = round(365 / $frekuensi);
 
-        $bil1 = ($this->request->getPost('penjualan_harian_tertinggi') * $this->request->getPost('lead_time_tertinggi'));
-        $bil2 = ($this->request->getPost('rata_rata_penjualan_harian') * $this->request->getPost('rata_rata_lead_time'));
+        // SS
+        $bil1 = ($penjualanHarianTertinggi * $leadTimeTertinggi);
+        $bil2 = ($rataRataPenjualanHarian * $rataRataLeadTime);
         $ss = $bil1 - $bil2;
 
-        $leadTime = $this->request->getPost('lead_time');
-        $au = $this->request->getPost('avarange_use') / 365;
+        // ROP
+        $leadTime = 2;
+        $au = $avarangeUse / 365;
         $rop = ($leadTime * $au);
         $rop = $rop + $ss;
 
         $maximumInventory = $ss + $eoq;
 
         $request = $this->request->getPost();
+        $request['permintaan'] = $permintaan;
+        $request['biaya_pemesanan'] = $biayaPemesanan;
+        $request['biaya_penyimpanan'] = $biayaPenyimpanan;
+        $request['lead_time'] = $leadTime;
+        $request['avarange_use'] = $avarangeUse;
+        $request['penjualan_harian_tertinggi'] = $penjualanHarianTertinggi;
+        $request['lead_time_tertinggi'] = $leadTimeTertinggi;
+        $request['rata_rata_penjualan_harian'] = $rataRataPenjualanHarian;
+        $request['rata_rata_lead_time'] = $rataRataLeadTime;
         $request['daur_ulang_pemesanan'] = $daurUlangPemesanan;
         $request['safety_stok'] = $ss;
         $request['eoq'] = $eoq;

@@ -49,9 +49,6 @@ class CreatePemesananTable extends Migration
             ],
             'updated_at' => [
                 'type'       => 'DATETIME'
-            ],
-            'deleted_at' => [
-                'type'       => 'DATETIME'
             ]
         ]);
 
