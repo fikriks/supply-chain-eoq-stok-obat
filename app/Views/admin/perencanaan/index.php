@@ -49,60 +49,6 @@ Perencanaan
                         <div class="col-md-8 form-group">
                             <input type="number" class="form-control" name="harga" placeholder="Harga" id="harga" value="<?= old('harga') ?>" readonly required>
                         </div>
-                        <div class="col-md-4">
-                            <label>Permintaan/Tahun</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="permintaan" placeholder="Permintaan Pertahun" value="<?= old('permintaan') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Biaya Pemesanan</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="biaya_pemesanan" placeholder="Biaya Pemesanan" value="<?= old('biaya_pemesanan') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Biaya Penyimpanan</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="biaya_penyimpanan" placeholder="Biaya Penyimpanan" value="<?= old('biaya_penyimpanan') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Lead Time</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="lead_time" placeholder="Lead Time" value="<?= old('lead_time') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Avarange Use</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="avarange_use" placeholder="Averange Use" value="<?= old('avarange_use') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Penjualan Harian Tertinggi</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="penjualan_harian_tertinggi" placeholder="Penjualan Harian Tertinggi" value="<?= old('penjualan_harian_tertinggi') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Lead Time Tertinggi</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="lead_time_tertinggi" placeholder="Lead Time Tertinggi" value="<?= old('lead_time_tertinggi') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Rata-Rata Penjualan Harian</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="rata_rata_penjualan_harian" placeholder="Rata-Rata Penjualan Harian" value="<?= old('rata_rata_penjualan_harian') ?>" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Rata-Rata Lead Time</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <input type="number" class="form-control" name="rata_rata_lead_time" placeholder="Rata-Rata Lead Time" value="<?= old('rata_rata_lead_time') ?>" required>
-                        </div>
 
                         <div class="col-md-4">
                         </div>

@@ -7,26 +7,35 @@ use App\Controllers\BaseController;
 use App\Models\Pemesanan;
 use App\Models\Penjualan;
 use App\Models\Obat;
+use App\Models\Perencanaan;
 
 class Dashboard extends BaseController
 {
-    private $Pemesanan, $Penjualan, $Obat;
+    private $Pemesanan, $Penjualan, $Obat, $Perencanaan;
 
     public function __construct()
     {
         $this->Pemesanan = new Pemesanan();
         $this->Penjualan = new Penjualan();
         $this->Obat = new Obat();
+        $this->Perencanaan = new Perencanaan();
     }
 
     public function index()
     {
         if (auth()->user()->inGroup('admin', 'manajer', 'staff')) {
             $obat = $this->Obat->findAll();
+            $namaObatSafetyStok = [];
 
             foreach ($obat as $ob) {
                 $namaObat[] = $ob->nama;
                 $stokObat[] = $ob->stok;
+
+                $cekSafetyStok = $this->Perencanaan->where('obat_id', $ob->id)->first()->safety_stok;
+                $safetyStok = $ob->stok - $cekSafetyStok;
+                if ($safetyStok <= 10) {
+                    $namaObatSafetyStok[] = $ob->nama;
+                }
             }
 
             $barangMasuk = $this->Pemesanan->where('YEAR(tanggal)', date('Y'))->findAll();
@@ -71,6 +80,7 @@ class Dashboard extends BaseController
             $totalBarangMasukKeluarDesember = $barangMasukDesember + $barangKeluarDesember;
 
             $data = [
+                'namaObatSafetyStok' => $namaObatSafetyStok,
                 'namaObat' => $namaObat,
                 'stokObat' => $stokObat,
                 'barangMasuk' => $barangMasuk,
