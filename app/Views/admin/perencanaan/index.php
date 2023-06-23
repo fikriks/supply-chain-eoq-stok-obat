@@ -69,7 +69,6 @@ Perencanaan
                         <th>Nama Obat</th>
                         <th>Supplier</th>
                         <th>Safety Stok</th>
-                        <th>Daur Ulang Pemesanan</th>
                         <th>EOQ</th>
                         <th>ROP</th>
                         <th>Dibuat</th>
@@ -86,7 +85,6 @@ Perencanaan
                             <td><?= $p->nama_obat ?></td>
                             <td><?= $p->name ?></td>
                             <td><?= $p->safety_stok ?></td>
-                            <td><?= $p->daur_ulang_pemesanan ?></td>
                             <td><?= $p->eoq ?></td>
                             <td><?= $p->rop ?></td>
                             <td><?= $p->created_at ?></td>
