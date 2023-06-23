@@ -237,7 +237,9 @@ Tambah Penjualan
         let harga = $('#harga-' + kodeProduk).val();
 
         if (kuantitas > stok) {
+            $('#qty-' + kodeProduk).val('0');
             alert('Penjualan melebihi stok yang ada');
+
             return false;
         }
 
