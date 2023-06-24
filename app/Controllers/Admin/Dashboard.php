@@ -31,10 +31,13 @@ class Dashboard extends BaseController
                 $namaObat[] = $ob->nama;
                 $stokObat[] = $ob->stok;
 
-                $cekSafetyStok = $this->Perencanaan->where('obat_id', $ob->id)->first()->safety_stok;
-                $safetyStok = $ob->stok - $cekSafetyStok;
-                if ($safetyStok <= 10) {
-                    $namaObatSafetyStok[] = $ob->nama;
+                $cekSafetyStok = $this->Perencanaan->where('obat_id', $ob->id)->first();
+                if (!empty($cekSafetyStok)) {
+                    $safety = $cekSafetyStok->safety_stok;
+                    $safetyStok = $ob->stok - $safety;
+                    if ($safetyStok <= 10) {
+                        $namaObatSafetyStok[] = $ob->nama;
+                    }
                 }
             }
 
