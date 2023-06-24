@@ -77,6 +77,18 @@ class Perencanaan extends ResourceController
         $rataRataPenjualanHarian = $this->PenjualanDetail->selectAvg('qty')->where('obat_id', $obat->id)->first()->qty;
         $penjualan = $this->PenjualanDetail->where('obat_id', $obat->id)->where('YEAR(created_at)', date('Y'))->findAll();
 
+        if (empty($pemesanan)) {
+            session()->setFlashdata('error', 'Data pemesanan obat ini belum ada, silahkan melakukan pemesanan data obat terlebih dahulu');
+
+            return redirect()->to('admin/perencanaan');
+        }
+
+        if (empty($penjualan)) {
+            session()->setFlashdata('error', 'Data penjualan obat ini beluma ada, silahkan melakukan penjualan data obat terlebih dahulu');
+
+            return redirect()->to('admin/perencanaan');
+        }
+
         foreach ($pemesanan as $pmsn) {
             $permintaan += $pmsn->qty;
         }
