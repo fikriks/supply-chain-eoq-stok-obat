@@ -16,8 +16,8 @@ class PermintaanObat extends ResourceController
     public function index()
     {
         $data = [
-            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI_SUPPLIER')->withRelations(),
-            'permintaanKirimObat' => $this->model->where('status', 'TERKONFIRMASI')->orWhere('status', 'DIKIRIM')->withRelations(),
+            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'DIVALIDASI_OLEH_MANAJER')->withRelations(),
+            'permintaanKirimObat' => $this->model->where('status', 'DIVALIDASI_OLEH_SUPPLIER')->orWhere('status', 'DIKIRIM')->withRelations(),
             'permintaanSukses' => $this->model->where('status', 'PESANAN_DITERIMA')->withRelations()
         ];
 

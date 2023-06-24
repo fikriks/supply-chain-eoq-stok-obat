@@ -66,7 +66,7 @@ Permintaan Obat
                                                 <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
                                                     <?= csrf_field() ?>
                                                     <input type="hidden" name="_method" value="PUT" />
-                                                    <input type="hidden" name="status" value="TERKONFIRMASI" />
+                                                    <input type="hidden" name="status" value="DIVALIDASI_OLEH_SUPPLIER" />
                                                     <button type="submit" class="btn btn-success col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-check"></i></button>
                                                 </form>
                                             </div>
@@ -108,7 +108,7 @@ Permintaan Obat
                                         <td><?= $p->updated_at ?></td>
                                         <td>
                                             <div class="row">
-                                                <?php if ($p->status == "TERKONFIRMASI") : ?>
+                                                <?php if ($p->status == "DIVALIDASI_OLEH_SUPPLIER") : ?>
                                                     <form class="col" action="<?= site_url('admin/permintaan-obat/' . $p->pemesanan_id) ?>" method="POST">
                                                         <?= csrf_field() ?>
                                                         <input type="hidden" name="_method" value="PUT" />

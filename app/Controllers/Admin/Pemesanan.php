@@ -26,7 +26,7 @@ class Pemesanan extends ResourceController
     public function index()
     {
         $data = [
-            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI_SUPPLIER')->withRelations(),
+            'permintaanMenungguKonfirmasi' => $this->model->where('status', 'MENUNGGU_KONFIRMASI_MANAJER')->withRelations(),
             'pesananDikirim' => $this->model->where('status', 'DIKIRIM')->withRelations(),
             'pesananDiterima' => $this->model->where('status', 'PESANAN_DITERIMA')->withRelations()
         ];
@@ -82,7 +82,7 @@ class Pemesanan extends ResourceController
         $hargaObat = $this->Obat->find($request['obat_id'])->harga_beli;
         $request['supplier_id'] = $this->User->find($this->request->getPost('supplier_id'))->id;
         $request['total_harga'] = $request['qty'] * $hargaObat;
-        $request['status'] = "MENUNGGU_KONFIRMASI_SUPPLIER";
+        $request['status'] = "MENUNGGU_KONFIRMASI_MANAJER";
 
         $result = $this->model->save($request);
 

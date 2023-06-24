@@ -15,7 +15,7 @@ class ValidasiPemesanan extends ResourceController
      */
     public function index()
     {
-        $data['pemesanan'] = $this->model->where('status', 'MENUNGGU_KONFIRMASI')->withRelations();
+        $data['pemesanan'] = $this->model->where('status', 'MENUNGGU_KONFIRMASI_MANAJER')->withRelations();
 
         return view('admin/validasi-pemesanan/index', $data);
     }

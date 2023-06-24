@@ -47,7 +47,7 @@ Validasi Pemesanan
                                     <form class="col" action="<?= site_url('admin/validasi-pemesanan/' . $p->pemesanan_id) ?>" method="POST">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="_method" value="PUT" />
-                                        <input type="hidden" name="status" value="DIKIRIM" />
+                                        <input type="hidden" name="status" value="DIVALIDASI_OLEH_MANAJER" />
                                         <button type="submit" class="btn btn-success col" onClick="return confirm('Apakah anda yakin ingin mengubah status data ini?');"><i class="bi bi-check"></i></button>
                                     </form>
                                 </div>
