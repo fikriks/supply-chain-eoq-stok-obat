@@ -20,7 +20,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Masuk</h6>
-                                    <h6 class="font-extrabold mb-0"><?= count($barangMasuk) ?></h6>
+                                    <h6 class="font-extrabold mb-0"><?= $totalBarangMasuk ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@ Dashboard
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Total Barang Keluar</h6>
-                                    <h6 class="font-extrabold mb-0"><?= count($barangKeluar) ?></h6>
+                                    <h6 class="font-extrabold mb-0"><?= $totalBarangKeluar ?></h6>
                                 </div>
                             </div>
                         </div>
