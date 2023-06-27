@@ -39,7 +39,7 @@ Validasi Pemesanan
                             <td><?= $p->nama ?></td>
                             <td><?= $p->name ?></td>
                             <td><?= $p->qty ?></td>
-                            <td><?= $p->total_harga ?></td>
+                            <td><?= number_format($p->total_harga, 2, ',', '.') ?></td>
                             <td><?= $p->created_at ?></td>
                             <td><?= $p->updated_at ?></td>
                             <td>
