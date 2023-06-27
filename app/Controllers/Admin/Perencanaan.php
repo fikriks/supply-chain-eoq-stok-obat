@@ -99,23 +99,27 @@ class Perencanaan extends ResourceController
 
         // EOQ
         $baris1 = 2 * $permintaan * $biayaPemesanan;
-        $baris2 = $obat->harga_jual * $biayaPenyimpanan;
+        $baris2 = $obat->harga_beli * $biayaPenyimpanan;
         $eoq = $baris1 / $baris2;
-        $eoq = ceil($eoq);
-        $eoq = round(sqrt($eoq));
+        $eoq = sqrt($eoq);
+        $eoq = round($eoq, 3) + 0;
+        $eoq = ltrim($eoq, '0');
+        $eoq = (int) str_replace('.', '', $eoq);
         $frekuensi = round($permintaan / $eoq);
         $daurUlangPemesanan = round(365 / $frekuensi);
 
         // SS
         $bil1 = ($penjualanHarianTertinggi * $leadTimeTertinggi);
-        $bil2 = ($rataRataPenjualanHarian * $rataRataLeadTime);
+        $bil2 = round($rataRataPenjualanHarian * $rataRataLeadTime);
         $ss = $bil1 - $bil2;
 
         // ROP
         $leadTime = 2;
-        $au = $avarangeUse / 365;
+        $au = round($avarangeUse / 365, 1);
         $rop = ($leadTime * $au);
         $rop = $rop + $ss;
+
+
 
         $maximumInventory = $ss + $eoq;
 
@@ -166,11 +170,13 @@ class Perencanaan extends ResourceController
      */
     public function update($id = null)
     {
-        $baris1 = 2 * $this->request->getPost('permintaan') * $this->request->getPost('biaya_pemesanan');
-        $baris2 = $this->request->getPost('harga') * ($this->request->getPost('biaya_penyimpanan') / 100);
+        $baris1 = 2 * $this->request->getPost('permintaan') * $this->request->getPost('biaya_pemesanan');;
+        $baris2 = $this->request->getPost('harga') * $this->request->getPost('biaya_penyimpanan');
         $eoq = $baris1 / $baris2;
-        $eoq = ceil($eoq);
-        $eoq = round(sqrt($eoq));
+        $eoq = sqrt($eoq);
+        $eoq = round($eoq, 3) + 0;
+        $eoq = ltrim($eoq, '0');
+        $eoq = (int) str_replace('.', '', $eoq);
         $frekuensi = round($this->request->getPost('permintaan') / $eoq);
         $daurUlangPemesanan = round(365 / $frekuensi);
 
