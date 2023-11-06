@@ -41,6 +41,7 @@ class Obat extends Model
 
     public function withRelations()
     {
+
         $this->select("{$this->table}.*, kategori_obat.nama AS nama_kategori_obat, satuan.nama AS nama_satuan, auth_identities.name AS nama_supplier");
 
         $this->join('kategori_obat', 'kategori_obat.id = obat.kategori_obat_id')

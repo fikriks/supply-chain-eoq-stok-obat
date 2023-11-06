@@ -131,7 +131,7 @@ class Pemesanan extends ResourceController
             // End Pengurangan Stok
 
             if ($result) {
-                session()->setFlashdata('message', 'Edit Data Berhasil');
+                session()->setFlashdata('message', 'Obat Telah diterima');
             } else {
                 session()->setFlashdata('error', 'Edit Data Tidak Berhasil');
             }

@@ -70,7 +70,7 @@ class ValidasiPemesanan extends ResourceController
         $result =  $this->model->update($id, $this->request->getPost());
 
         if ($result) {
-            session()->setFlashdata('message', 'Edit Data Berhasil');
+            session()->setFlashdata('message', 'Pesanan Telah divalidasi');
         } else {
             session()->setFlashdata('error', 'Edit Data Tidak Berhasil');
         }

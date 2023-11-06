@@ -103,18 +103,15 @@ Dashboard
 <?php if (auth()->user()->inGroup('staff')) { ?>
     <section class="row">
         <div class="col-12 col-lg-12">
-            <?php if (!empty($namaObatSafetyStok)) : ?>
-                <div class="row">
-                    <div class="alert alert-danger" role="alert">
-                        Obat yang mendekati safety stok:
-                        <ul>
-                            <?php foreach ($namaObatSafetyStok as $obatSs) : ?>
-                                <li><?= $obatSs ?></li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                </div>
-            <?php endif ?>
+            <?php foreach ($perencanaan as $p) : ?>
+                <?php if ($p->stok - $p->safety_stok <= 5 && $p->stok - $p->safety_stok >= 0) : ?>
+                    <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Mendekati Safety Stok</b></div>
+                <?php endif ?>
+
+                <?php if ($p->stok - $p->safety_stok <= 0) : ?>
+                    <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Kurang Dari Safety Stok</b></div>
+                <?php endif ?>
+            <?php endforeach ?>
             <div class="row">
                 <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">

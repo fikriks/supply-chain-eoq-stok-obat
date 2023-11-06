@@ -7,10 +7,11 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\KategoriObat;
 use App\Models\Satuan;
 use App\Models\UserModel;
+use App\Models\Perencanaan;
 
 class Obat extends ResourceController
 {
-    private $KategoriObat, $Satuan, $User;
+    private $KategoriObat, $Satuan, $User, $Perencanaan;
     protected $modelName = 'App\Models\Obat';
 
     public function __construct()
@@ -18,6 +19,7 @@ class Obat extends ResourceController
         $this->KategoriObat = new KategoriObat();
         $this->Satuan = new Satuan();
         $this->User = new UserModel();
+        $this->Perencanaan = new Perencanaan();
     }
 
     /**
@@ -28,9 +30,31 @@ class Obat extends ResourceController
     public function index()
     {
         if ($this->request->getGet()) {
-            $data['obat'] = $this->model->withRelations()->where('obat.nama', $this->request->getGet('obat'))->findAll();
+            if ($this->request->getGet('obat') == "" && $this->request->getGet('supplier') == "") {
+                $obat = $this->model->withRelations()->findAll();
+            } else if ($this->request->getGet('obat') !== "") {
+                $obat = $this->model->withRelations()->where('obat.nama', $this->request->getGet('obat'))->findAll();
+            } else if ($this->request->getGet('supplier') !== "") {
+                $obat = $this->model->withRelations()->where('obat.supplier_id', $this->request->getGet('supplier'))->findAll();
+            } else if ($this->request->getGet('obat') != "" && $this->request->getGet('supplier') != "") {
+                $obat = $this->model->withRelations()->where('obat.nama', $this->request->getGet('obat'))->where('obat.supplier_id', $this->request->getGet('supplier'))->findAll();
+            } else {
+                $obat = $this->model->withRelations()->findAll();
+            }
+
+            $data = [
+                'obat' => $obat,
+                'listObat' => $this->model->withRelations()->findAll(),
+                'perencanaan' => $this->Perencanaan->withRelations(),
+                'supplier' => $this->User->getIdentity()
+            ];
         } else {
-            $data['obat'] = $this->model->withRelations()->findAll();
+            $data = [
+                'obat' => $this->model->withRelations()->findAll(),
+                'listObat' => $this->model->withRelations()->findAll(),
+                'perencanaan' => $this->Perencanaan->withRelations(),
+                'supplier' => $this->User->getIdentity()
+            ];
         }
 
         return view('admin/obat/index', $data);

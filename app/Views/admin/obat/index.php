@@ -13,6 +13,16 @@ Obat
     <div class="alert alert-success" role="alert"><?= session('message') ?></div>
 <?php endif ?>
 
+<?php foreach ($perencanaan as $p) : ?>
+    <?php if ($p->stok - $p->safety_stok <= 5 && $p->stok - $p->safety_stok >= 0) : ?>
+        <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Mendekati Safety Stok</b></div>
+    <?php endif ?>
+
+    <?php if ($p->stok - $p->safety_stok <= 0) : ?>
+        <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Kurang Dari Safety Stok</b></div>
+    <?php endif ?>
+<?php endforeach ?>
+
 <!-- Basic Tables start -->
 <section class="section">
     <div class="card">
@@ -24,10 +34,23 @@ Obat
                             <label>Pilih Obat</label>
                         </div>
                         <div class="col-md-8 form-group">
-                            <select name="obat" class="form-control" required>
-                                <option value="" selected disabled>-- Pilih --</option>
-                                <?php foreach ($obat as $o) : ?>
+                            <select name="obat" class="form-control">
+                                <option value="" selected>-- Pilih --</option>
+                                <?php foreach ($listObat as $o) : ?>
                                     <option value="<?= $o->nama ?>" <?= request()->getGet('obat') == $o->nama ? 'selected' : '' ?>><?= $o->nama ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Pilih Supplier</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="supplier" class="form-control">
+                                <option value="" selected>-- Pilih --</option>
+                                <?php foreach ($supplier as $s) : ?>
+                                    <?php if ($s->group == "supplier") : ?>
+                                        <option value="<?= $s->identity_id ?>" <?= request()->getGet('supplier') == $s->identity_id ? 'selected' : '' ?>><?= $s->name ?></option>
+                                    <?php endif ?>
                                 <?php endforeach ?>
                             </select>
                         </div>
@@ -41,6 +64,8 @@ Obat
             </form>
         </div>
     </div>
+
+
     <div class="card">
         <div class="card-header">
             <a href="<?= site_url('admin/obat/new') ?>" class="btn btn-primary">Tambah +</a>

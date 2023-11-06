@@ -13,6 +13,16 @@ Perencanaan
     <div class="alert alert-success" role="alert"><?= session('message') ?></div>
 <?php endif ?>
 
+<?php foreach ($perencanaan as $p) : ?>
+    <?php if ($p->stok - $p->safety_stok <= 5 && $p->stok - $p->safety_stok >= 0) : ?>
+        <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Mendekati Safety Stok</b></div>
+    <?php endif ?>
+
+    <?php if ($p->stok - $p->safety_stok <= 0) : ?>
+        <div class="alert alert-danger" role="alert">Obat <?= $p->nama_obat ?> <b>Kurang Dari Safety Stok</b></div>
+    <?php endif ?>
+<?php endforeach ?>
+
 <!-- Basic Tables start -->
 <section class="section">
     <div class="card">

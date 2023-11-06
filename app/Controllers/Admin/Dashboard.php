@@ -25,22 +25,13 @@ class Dashboard extends BaseController
     {
         if (auth()->user()->inGroup('admin', 'manajer', 'staff')) {
             $obat = $this->Obat->findAll();
-            $namaObatSafetyStok = [];
             $namaObat = [];
             $stokObat = [];
+            $perencanaan = $this->Perencanaan->withRelations();
 
             foreach ($obat as $ob) {
                 $namaObat[] = $ob->nama;
                 $stokObat[] = (int) $ob->stok;
-
-                $cekSafetyStok = $this->Perencanaan->where('obat_id', $ob->id)->first();
-                if (!empty($cekSafetyStok)) {
-                    $safety = $cekSafetyStok->safety_stok;
-                    $safetyStok = $ob->stok - $safety;
-                    if ($safetyStok <= 10) {
-                        $namaObatSafetyStok[] = $ob->nama;
-                    }
-                }
             }
 
             $totalBarangMasuk = 0;
@@ -216,7 +207,6 @@ class Dashboard extends BaseController
             $totalBarangMasukKeluarDesember = $barangMasukDes + $barangKeluarDes;
 
             $data = [
-                'namaObatSafetyStok' => $namaObatSafetyStok,
                 'namaObat' => $namaObat,
                 'stokObat' => $stokObat,
                 'barangMasuk' => $barangMasuk,
@@ -237,6 +227,7 @@ class Dashboard extends BaseController
                     $totalBarangMasukKeluarNovember,
                     $totalBarangMasukKeluarDesember
                 ],
+                'perencanaan' => $perencanaan,
             ];
 
             return view('admin/dashboard/index', $data);
