@@ -49,6 +49,10 @@ $routes->group("admin", ["filter" => "userFilter:admin,manajer,staff,supplier", 
     $routes->resource("validasi-pemesanan", ['controller' => 'ValidasiPemesanan']);
     $routes->resource("perencanaan", ['controller' => 'Perencanaan']);
 
+    $routes->get('obat-supplier/rest-obat/(:num)', 'ObatSupplier::restObat/$1');
+    $routes->get('obat-supplier/rest-obat-qty/(:num)', 'ObatSupplier::restObatQty/$1');
+    $routes->resource("obat-supplier", ['controller' => 'ObatSupplier']);
+
     $routes->get('laporan-penjualan/pdf', 'LaporanPenjualan::exportPdf');
     $routes->get('laporan-pemesanan/pdf', 'LaporanPemesanan::exportPdf');
     $routes->get('laporan-barang-masuk-keluar/pdf', 'LaporanBarangMasukKeluar::exportPdf');
