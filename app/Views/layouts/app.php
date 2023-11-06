@@ -85,9 +85,28 @@
 
                         <?php if (auth()->user()->inGroup('staff')) { ?>
                             <li class="sidebar-item">
+                                <a href="<?= site_url('admin/obat-supplier') ?>" class='sidebar-link'>
+                                    <i class="bi bi-capsule"></i>
+                                    <span>Data Obat Supplier</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+
+
+                        <?php if (auth()->user()->inGroup('staff')) { ?>
+                            <li class="sidebar-item">
                                 <a href="<?= site_url('admin/pemesanan') ?>" class='sidebar-link'>
                                     <i class="bi bi-bag-fill"></i>
                                     <span>Pemesanan Obat</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+
+                        <?php if (auth()->user()->inGroup('supplier')) { ?>
+                            <li class="sidebar-item">
+                                <a href="<?= site_url('admin/obat-supplier') ?>" class='sidebar-link'>
+                                    <i class="bi bi-capsule"></i>
+                                    <span>Data Obat</span>
                                 </a>
                             </li>
                         <?php } ?>
