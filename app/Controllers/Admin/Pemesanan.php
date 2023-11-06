@@ -6,16 +6,18 @@ use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\UserModel;
 use App\Models\Obat;
+use App\Models\ObatSupplier;
 
 class Pemesanan extends ResourceController
 {
-    private $Obat, $User;
+    private $Obat, $User, $ObatSupplier;
     protected $modelName = 'App\Models\Pemesanan';
 
     public function __construct()
     {
         $this->Obat = new Obat();
         $this->User = new UserModel();
+        $this->ObatSupplier = new ObatSupplier();
     }
 
     /**
@@ -79,7 +81,14 @@ class Pemesanan extends ResourceController
         }
 
         $request = $this->request->getPost();
-        $hargaObat = $this->Obat->find($request['obat_id'])->harga_beli;
+
+        $obatSupplier = $this->ObatSupplier->find($request['obat_id']);
+        $kurangiStokObat = $obatSupplier->stok - $request['qty'];
+        $this->ObatSupplier->update($obatSupplier->id, [
+            'stok' => $kurangiStokObat
+        ]);
+
+        $hargaObat = $obatSupplier->harga;
         $request['supplier_id'] = $this->User->find($this->request->getPost('supplier_id'))->id;
         $request['total_harga'] = $request['qty'] * $hargaObat;
         $request['status'] = "MENUNGGU_KONFIRMASI_MANAJER";

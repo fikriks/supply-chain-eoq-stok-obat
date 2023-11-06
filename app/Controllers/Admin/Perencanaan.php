@@ -7,10 +7,11 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\Obat;
 use App\Models\Pemesanan;
 use App\Models\PenjualanDetail;
+use App\Models\Penjualan;
 
 class Perencanaan extends ResourceController
 {
-    private $Obat, $Pemesanan, $PenjualanDetail;
+    private $Obat, $Pemesanan, $PenjualanDetail, $Penjualan;
     protected $modelName = 'App\Models\Perencanaan';
 
     public function __construct()
@@ -18,6 +19,7 @@ class Perencanaan extends ResourceController
         $this->Obat = new Obat();
         $this->Pemesanan = new Pemesanan();
         $this->PenjualanDetail = new PenjualanDetail();
+        $this->Penjualan = new Penjualan();
     }
 
     /**
@@ -30,7 +32,8 @@ class Perencanaan extends ResourceController
         $data = [
             'kode' => $this->_generateCode(),
             'perencanaan' => $this->model->withRelations(),
-            'obat' => $this->Obat->findAll()
+            'obat' => $this->Obat->findAll(),
+            'periode' => $this->Penjualan->select('YEAR(tanggal) as tahun')->groupBy('YEAR(tanggal)')->findAll()
         ];
 
         return view('admin/perencanaan/index', $data);
@@ -72,10 +75,10 @@ class Perencanaan extends ResourceController
         $leadTimeTertinggi = 3;
         $rataRataLeadTime = 1;
         $obat = $this->Obat->find($this->request->getPost('obat_id'));
-        $pemesanan = $this->Pemesanan->where('obat_id', $obat->id)->where('status', 'PESANAN_DITERIMA')->where('YEAR(tanggal)', date('Y'))->findAll();
+        $pemesanan = $this->Pemesanan->where('obat_id', $obat->id)->where('status', 'PESANAN_DITERIMA')->where('YEAR(tanggal)', $this->request->getPost('periode'))->findAll();
         $penjualanHarianTertinggi = $this->PenjualanDetail->selectMax('qty')->where('obat_id', $obat->id)->first()->qty;
         $rataRataPenjualanHarian = $this->PenjualanDetail->selectAvg('qty')->where('obat_id', $obat->id)->first()->qty;
-        $penjualan = $this->PenjualanDetail->where('obat_id', $obat->id)->where('YEAR(created_at)', date('Y'))->findAll();
+        $penjualan = $this->PenjualanDetail->where('obat_id', $obat->id)->where('YEAR(created_at)', $this->request->getPost('periode'))->findAll();
 
         if (empty($pemesanan)) {
             session()->setFlashdata('error', 'Data pemesanan obat ini belum ada, silahkan melakukan pemesanan data obat terlebih dahulu');
@@ -116,7 +119,7 @@ class Perencanaan extends ResourceController
         // ROP
         $leadTime = 2;
         $au = round($avarangeUse / 365, 1);
-        $rop = ($leadTime * $au);
+        $rop = ($leadTime * $au + $ss);
         $rop = $rop + $ss;
 
 

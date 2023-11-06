@@ -28,21 +28,10 @@ Tambah Pemesanan Obat
                             <input type="text" class="form-control" name="kode" placeholder="Kode Pemesanan" value="<?= $kode ?>" readonly required>
                         </div>
                         <div class="col-md-4">
-                            <label>Obat</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                            <select name="obat_id" class="form-control" required>
-                                <option value="" selected disabled>-- Pilih --</option>
-                                <?php foreach ($obat as $o) : ?>
-                                    <option value="<?= $o->id ?>" <?= old('obat_id') == $o->id ? 'selected' : '' ?>><?= $o->nama ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
                             <label>Supplier</label>
                         </div>
                         <div class="col-md-8 form-group">
-                            <select name="supplier_id" class="form-control" required>
+                            <select name="supplier_id" id="supplier" class="form-control" required>
                                 <option value="" selected disabled>-- Pilih --</option>
                                 <?php foreach ($supplier as $s) : ?>
                                     <?php if ($s->group == 'supplier') : ?>
@@ -50,6 +39,20 @@ Tambah Pemesanan Obat
                                     <?php endif ?>
                                 <?php endforeach ?>
                             </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Obat</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="obat_id" id="obat" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih Data Supplier Terlebih Dahulu --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label></label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                          <span id="keterangan"></span>
                         </div>
                         <div class="col-md-4">
                             <label>Qty</label>
@@ -71,4 +74,61 @@ Tambah Pemesanan Obat
     </div>
 </section>
 <!-- Basic Tables end -->
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    let kode_produk = [],
+        kuantitas = [],
+        harga = [],
+        total = []
+    no = 0;
+
+    $(document).ready(function() {
+        $('#supplier').on('change', () => {
+            $.ajax({
+                    url: "<?= site_url('admin/obat-supplier/rest-obat/') ?>" + $('#supplier').val(),
+                    type: "GET",
+                    dataType: "json",
+                })
+                .done(function(json) {
+                   if(json.length > 0){
+                    $('#obat').empty();
+                    $('#obat').append("<option value='' selected disabled>-- Pilih --</option>");
+
+                    for (i = 0; i < json.length; i++){
+                        $('#obat').append("<option value='" + json[i].id+ "'>" + json[i].nama + "</option>");
+                    }
+                   } else {
+                    $('#obat').empty();
+                    $('#obat').append("<option value='' selected disabled>-- Tidak Terdapat Data Obat Pada Supplier Yang Dipilih --</option>");
+                   }
+                })
+                .fail(function(xhr, status, errorThrown) {
+                    alert("Sorry, there was a problem!");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                })
+        })
+
+        $('#obat').on('change', () => {
+            $.ajax({
+                    url: "<?= site_url('admin/obat-supplier/rest-obat-qty/') ?>" + $('#obat').val(),
+                    type: "GET",
+                    dataType: "json",
+                })
+                .done(function(json) {
+                    $('#keterangan').html(`Stok data obat yang terdapat di supplier yaitu <b>${json.stok}</b>`);
+                })
+                .fail(function(xhr, status, errorThrown) {
+                    alert("Sorry, there was a problem!");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                })
+        })
+    });
+</script>
 <?= $this->endSection() ?>

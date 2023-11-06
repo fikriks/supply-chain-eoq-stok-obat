@@ -59,6 +59,17 @@ Perencanaan
                         <div class="col-md-8 form-group">
                             <input type="number" class="form-control" name="harga" placeholder="Harga" id="harga" value="<?= old('harga') ?>" readonly required>
                         </div>
+                        <div class="col-md-4">
+                            <label>Periode</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                        <select name="periode" id="periode" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($periode as $p) : ?>
+                                    <option value="<?= $p->tahun ?>" <?= old('periode') == $p->tahun ? 'selected' : '' ?>><?= $p->tahun ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
 
                         <div class="col-md-4">
                         </div>
