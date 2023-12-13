@@ -55,7 +55,7 @@ class Pemesanan extends ResourceController
     {
         $data = [
             'kode' => $this->_generateCode(),
-            'obat' => $this->Obat->findAll(),
+            'obat' => $this->ObatSupplier->findAll(),
             'supplier' => $this->User->getIdentity()
         ];
 
@@ -113,7 +113,7 @@ class Pemesanan extends ResourceController
     {
         $data = [
             'pemesanan' => $this->model->find($id),
-            'obat' => $this->Obat->findAll(),
+            'obat' => $this->ObatSupplier->findAll(),
             'supplier' => $this->User->getIdentity()
         ];
 
@@ -130,15 +130,32 @@ class Pemesanan extends ResourceController
         if ($this->request->getPost('status')) {
             $result =  $this->model->update($id, $this->request->getPost());
 
-            // Pengurangan Stok
-            $obat = $this->Obat->find($this->request->getPost('obat_id'));
-            $stok = $obat->stok + $this->request->getPost('kuantitas');
+            $obat = $this->Obat->where('kode', $this->request->getPost('kode_obat'))->first();
 
-            $this->Obat->update($obat->id, [
-                'stok' => $stok
-            ]);
-            // End Pengurangan Stok
+            if($obat){
+                // Pengurangan Stok
+                $stok = $obat->stok + $this->request->getPost('kuantitas');
 
+                $this->Obat->update($obat->id, [
+                    'stok' => $stok
+                ]);
+                // End Pengurangan Stok
+            }  else {
+                $obatSupplier = $this->ObatSupplier->where('kode', $this->request->getPost('kode_obat'))->first();
+
+                $this->Obat->save([
+                    'kode' => $obatSupplier->kode,
+                    'nama'=> $obatSupplier->nama,
+                    'kategori_obat_id' => $obatSupplier->kategori_obat_id,
+                    'supplier_id' => $obatSupplier->user_id,
+                    'satuan_id' => $obatSupplier->satuan_id,
+                    'stok' => $this->request->getPost('kuantitas'),
+                    'harga_beli' => $obatSupplier->harga,
+                    'harga_jual' => $obatSupplier->harga + 2000,
+                    'expired' => $obatSupplier->expired,
+                ]);
+            }
+           
             if ($result) {
                 session()->setFlashdata('message', 'Obat Telah diterima');
             } else {

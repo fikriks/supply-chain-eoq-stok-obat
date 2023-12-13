@@ -41,10 +41,10 @@ class Pemesanan extends Model
 
     function withRelations()
     {
-        $this->select('pemesanan.*, pemesanan.id as pemesanan_id, pemesanan.kode AS pemesanan_kode, obat.*, obat.nama AS nama_obat, auth_identities.*, auth_identities.name AS nama_supplier, pemesanan.kode AS kode_pemesanan');
+        $this->select('pemesanan.*, pemesanan.id as pemesanan_id, pemesanan.kode AS pemesanan_kode, obat_supplier.*, obat_supplier.nama AS nama_obat, auth_identities.*, auth_identities.name AS nama_supplier, pemesanan.kode AS kode_pemesanan');
 
-        $data = $this->join('obat', 'obat.id = pemesanan.obat_id')
-            ->join('auth_identities', 'auth_identities.user_id = obat.supplier_id')
+        $data = $this->join('obat_supplier', 'obat_supplier.id = pemesanan.obat_id')
+            ->join('auth_identities', 'auth_identities.user_id = obat_supplier.user_id')
             ->findAll();
 
         return $data;

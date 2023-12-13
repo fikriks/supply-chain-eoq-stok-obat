@@ -115,6 +115,7 @@ Pemesanan Obat
                                                     <?= csrf_field() ?>
                                                     <input type="hidden" name="_method" value="PUT" />
                                                     <input type="hidden" name="status" value="PESANAN_DITERIMA" />
+                                                    <input type="hidden" name="kode_obat" value="<?= $p->kode ?>" />
                                                     <input type="hidden" name="obat_id" value="<?= $p->obat_id ?>" />
                                                     <input type="hidden" name="kuantitas" value="<?= $p->qty ?>" />
 
