@@ -13,7 +13,7 @@ class ObatSupplier extends Model
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['nama', 'kategori_obat', 'user_id', 'stok', 'harga'];
+    protected $allowedFields    = ['kode', 'nama', 'kategori_obat_id', 'user_id','satuan_id', 'stok', 'harga', 'expired'];
 
     // Dates
     protected $useTimestamps = true;
@@ -42,9 +42,11 @@ class ObatSupplier extends Model
     public function withRelations()
     {
 
-        $this->select("{$this->table}.*, auth_identities.name AS nama_supplier");
+        $this->select("{$this->table}.*, auth_identities.name AS nama_supplier,satuan.nama AS nama_satuan, kategori_obat.nama AS nama_kategori_obat");
 
-        $this->join('auth_identities', 'auth_identities.user_id = obat_supplier.user_id');
+        $this->join('kategori_obat', "kategori_obat.id = obat_supplier.kategori_obat_id")
+        ->join('satuan', "satuan.id = obat_supplier.satuan_id")
+        ->join('auth_identities', 'auth_identities.user_id = obat_supplier.user_id');
 
         return $this;
     }
@@ -52,9 +54,12 @@ class ObatSupplier extends Model
     public function withRelationsById($id)
     {
 
-        $this->select("{$this->table}.*, auth_identities.name AS nama_supplier");
-
-        $this->join('auth_identities', "auth_identities.user_id = {$id}");
+        $this->select("{$this->table}.*, auth_identities.name AS nama_supplier, satuan.nama AS nama_satuan, kategori_obat.nama AS nama_kategori_obat");
+        
+        $this->join('kategori_obat', "kategori_obat.id = obat_supplier.kategori_obat_id")
+        ->join('satuan', "satuan.id = obat_supplier.satuan_id")
+        ->join('auth_identities', "auth_identities.user_id = {$id}")
+        ->where('obat_supplier.user_id', $id);
 
         return $this;
     }

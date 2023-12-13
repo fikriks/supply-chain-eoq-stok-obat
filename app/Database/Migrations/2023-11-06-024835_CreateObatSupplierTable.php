@@ -15,15 +15,25 @@ class CreateObatSupplierTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'kode' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 191
+            ],
             'nama' => [
                 'type'       => 'VARCHAR',
                 'constraint' => 191
             ],
-            'kategori_obat' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 191
+            'kategori_obat_id' => [
+                'type'       => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true
             ],
             'user_id' => [
+                'type'       => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true
+            ],
+            'satuan_id' => [
                 'type'       => 'INT',
                 'constraint'     => 11,
                 'unsigned'       => true
@@ -36,6 +46,9 @@ class CreateObatSupplierTable extends Migration
                 'type'       => 'INT',
                 'constraint'     => 11
             ],
+            'expired' => [
+                'type'       => 'DATE'
+            ],
             'created_at' => [
                 'type'       => 'DATETIME'
             ],
@@ -45,7 +58,10 @@ class CreateObatSupplierTable extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addKey('kode', false, true);
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('kategori_obat_id', 'kategori_obat', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('satuan_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('obat_supplier');
     }
 

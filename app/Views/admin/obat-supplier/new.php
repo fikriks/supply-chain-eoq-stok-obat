@@ -15,17 +15,39 @@ Tambah Obat
             <form action="<?= site_url('admin/obat-supplier') ?>" method="POST" class="form form-horizontal">
                 <div class="form-body">
                     <div class="row">
+                         <div class="col-md-4">
+                            <label>Kode</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="text" class="form-control" name="kode" placeholder="Kode" value="<?= old('kode') ?>" required>
+                        </div>
                         <div class="col-md-4">
                             <label>Nama</label>
                         </div>
                         <div class="col-md-8 form-group">
                             <input type="text" class="form-control" name="nama" placeholder="Nama" value="<?= old('nama') ?>" required>
                         </div>
-                        <div class="col-md-4">
+                           <div class="col-md-4">
                             <label>Kategori</label>
                         </div>
                         <div class="col-md-8 form-group">
-                            <input type="text" class="form-control" name="kategori_obat" placeholder="Kategori Obat" value="<?= old('kategori_obat') ?>" required>
+                            <select name="kategori_obat_id" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($kategoriObat as $ko) : ?>
+                                    <option value="<?= $ko->id ?>" <?= old('kategori_obat_id') == $ko->id ? 'selected' : '' ?>><?= $ko->nama ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Satuan</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <select name="satuan_id" class="form-control" required>
+                                <option value="" selected disabled>-- Pilih --</option>
+                                <?php foreach ($satuanObat as $s) : ?>
+                                    <option value="<?= $s->id ?>" <?= old('satuan_id') == $s->id ? 'selected' : '' ?>><?= $s->nama ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label>Stok</label>
@@ -38,6 +60,12 @@ Tambah Obat
                         </div>
                         <div class="col-md-8 form-group">
                             <input type="number" class="form-control" name="harga" placeholder="Harga Jual" value="<?= old('harga') ?>" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label>Expired</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="date" class="form-control" name="expired" value="<?= old('expired') ?>" required>
                         </div>
 
                         <div class="col-md-4">

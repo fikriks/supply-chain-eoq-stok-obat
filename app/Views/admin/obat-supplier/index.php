@@ -17,9 +17,12 @@ Obat Supplier
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Kode</th>
                     <th>Supplier</th>
                     <th>Nama</th>
-                    <th>Kategori</th>
+                    <th>Kategori Obat</th>
+                    <th>Satuan</th>
+                    <th>Expired</th>
                     <th>Stok</th>
                     <th>Harga</th>
                     <?php if (auth()->user()->inGroup('supplier')) { ?>
@@ -34,9 +37,12 @@ Obat Supplier
                     <tr>
 
                         <td><?= $no++;  ?></td>
+                        <td><?= $os->kode ?></td>
                         <td><?= $os->nama_supplier ?></td>
                         <td><?= $os->nama ?></td>
-                        <td><?= $os->kategori_obat ?></td>
+                        <td><?= $os->nama_kategori_obat ?></td>
+                        <td><?= $os->nama_satuan ?></td>
+                        <td><?= $os->expired ?></td>
                         <td><?= $os->stok ?></td>
                         <td><?= $os->harga ?></td>
                         <?php if (auth()->user()->inGroup('supplier')) { ?>

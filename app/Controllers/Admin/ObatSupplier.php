@@ -5,9 +5,19 @@ namespace App\Controllers\Admin;
 use CodeIgniter\Database\MySQLi\Builder;
 use CodeIgniter\RESTful\ResourceController;
 
+use App\Models\KategoriObat;
+use App\Models\Satuan;
+
 class ObatSupplier extends ResourceController
 {
+    private $KategoriObat, $Satuan;
     protected $modelName = 'App\Models\ObatSupplier';
+
+    public function __construct()
+    {
+        $this->KategoriObat = new KategoriObat();
+        $this->Satuan = new Satuan();
+    }
 
     /**
      * Return an array of resource objects, themselves in array format
@@ -42,7 +52,12 @@ class ObatSupplier extends ResourceController
      */
     public function new()
     {
-        return view('admin/obat-supplier/new');
+        $data = [
+            'kategoriObat' => $this->KategoriObat->findAll(),
+            'satuanObat' => $this->Satuan->findAll()
+        ];
+
+        return view('admin/obat-supplier/new', $data);
     }
 
     /**
@@ -53,10 +68,13 @@ class ObatSupplier extends ResourceController
     public function create()
     {
         if (!$this->validate([
+            'kode' => 'required',
             'nama' => 'required',
-            'kategori_obat' => 'required',
+            'kategori_obat_id' => 'required',
+            'satuan_id' => 'required',
             'stok' => 'required',
-            'harga' => 'required'
+            'harga' => 'required',
+            'expired' =>'required'
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
 
@@ -64,11 +82,14 @@ class ObatSupplier extends ResourceController
         }
 
         $requestObatSupplier = [
+            'kode' =>  $this->request->getPost('kode'),
             'nama' =>  $this->request->getPost('nama'),
-            'kategori_obat' =>  $this->request->getPost('kategori_obat'),
+            'kategori_obat_id' =>  $this->request->getPost('kategori_obat_id'),
+            'satuan_id' =>  $this->request->getPost('satuan_id'),
             'user_id' => auth()->id(),
             'stok' =>  $this->request->getPost('stok'),
-            'harga' =>  $this->request->getPost('harga')
+            'harga' =>  $this->request->getPost('harga'),
+            'expired' =>  $this->request->getPost('expired'),
         ];
 
         $result = $this->model->save($requestObatSupplier);
@@ -90,7 +111,9 @@ class ObatSupplier extends ResourceController
     public function edit($id = null)
     {
         $data = [
-            'obatSupplier' => $this->model->find($id)
+            'obatSupplier' => $this->model->find($id),
+            'kategoriObat' => $this->KategoriObat->findAll(),
+            'satuanObat' => $this->Satuan->findAll()
         ];
 
         return view('admin/obat-supplier/edit', $data);
@@ -104,10 +127,13 @@ class ObatSupplier extends ResourceController
     public function update($id = null)
     {
         if (!$this->validate([
+            'kode' => 'required',
             'nama' => 'required',
-            'kategori_obat' => 'required',
+            'kategori_obat_id' => 'required',
+            'satuan_id' => 'required',
             'stok' => 'required',
-            'harga' => 'required'
+            'harga' => 'required',
+            'expired' =>'required'
         ])) {
             session()->setFlashdata('error', $this->validator->listErrors());
 
@@ -115,11 +141,14 @@ class ObatSupplier extends ResourceController
         }
 
         $requestObatSupplier = [
+            'kode' =>  $this->request->getPost('kode'),
             'nama' =>  $this->request->getPost('nama'),
-            'kategori_obat' =>  $this->request->getPost('kategori_obat'),
+            'kategori_obat_id' =>  $this->request->getPost('kategori_obat_id'),
+            'satuan_id' =>  $this->request->getPost('satuan_id'),
             'user_id' => auth()->id(),
             'stok' =>  $this->request->getPost('stok'),
-            'harga' =>  $this->request->getPost('harga')
+            'harga' =>  $this->request->getPost('harga'),
+            'expired' =>  $this->request->getPost('expired'),
         ];
 
         $result = $this->model->update($id, $requestObatSupplier);
